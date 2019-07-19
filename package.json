@@ -1,0 +1,46 @@
+{
+  "name": "@beyonk/svelte-mapbox",
+  "svelte": "src/components.js",
+  "module": "index.mjs",
+  "main": "index.js",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "NODE_ENV=development rollup -cw",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@gen/rollup-plugin-generate-html": "^0.1.1",
+    "autocompleter": "^5.0.1",
+    "rollup": "^1.16.1",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-serve": "^0.6.1",
+    "rollup-plugin-svelte": "^5.1.0",
+    "rollup-plugin-svg": "^1.0.1",
+    "svelte": "^3.6.7"
+  },
+  "keywords": [
+    "svelte",
+    "google",
+    "gmaps",
+    "maps",
+    "google apis",
+    "googlemaps",
+    "places",
+    "geolocation",
+    "mapbox",
+    "geocoder"
+  ],
+  "files": [
+    "src",
+    "index.mjs",
+    "index.js"
+  ],
+  "dependencies": {
+    "mapbox-gl": "^1.1.1"
+  }
+}
