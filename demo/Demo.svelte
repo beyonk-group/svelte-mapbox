@@ -51,7 +51,7 @@
           </div>
 					<div class="section-txt" id="map">
 						<div class="map-wrap">
-							<Map accessToken="%API_KEY%" controls={{ navigation: {}, geolocate: {} }} />
+							<Map accessToken="%API_KEY%" controls={{ navigation: {}, geolocate: {} }} on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) } />
 						</div>
 						{#if center}
 							<dt>Geolocation:</dt>
@@ -103,14 +103,6 @@
 	let page = 'about'
 	let place = null
 	let center
-	let mapConfig = {
-		center: {
-			lat: 53.58547136412861,
-			lng: -2.6269888562500228
-		},
-		zoom: 7
-	}
-	let map
 
 	function navigate (next) {
 		page = next

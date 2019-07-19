@@ -10,8 +10,10 @@
 </style>
 
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
   import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js'
+
+  const dispatch = createEventDispatcher()
 
   let container
   let el
@@ -48,6 +50,8 @@
       container,
       style: 'mapbox://styles/mapbox/streets-v11'
     })
+
+    el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
 
     Object
       .keys(controls)
