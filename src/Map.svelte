@@ -21,6 +21,7 @@
   export let options = {}
   export let controls = {}
   export let accessToken
+  export let style = 'mapbox://styles/mapbox/streets-v11'
 
   const controlTypes = {
     scaling: (position = 'bottom-right', options = {}) => {
@@ -58,7 +59,7 @@
     mapboxgl.accessToken = accessToken
     el = new mapboxgl.Map({
       container,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style,
       ...options
     })
 
