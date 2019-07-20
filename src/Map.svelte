@@ -11,12 +11,12 @@
 
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-  import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js'
 
   const dispatch = createEventDispatcher()
 
   let container
   let el
+  let mapboxgl
 
   export let controls = {}
   export let accessToken
@@ -44,7 +44,8 @@
     }
   }
 
-  onMount(() => {
+  onMount(async () => {
+    mapboxgl = await import('mapbox-gl/dist/mapbox-gl.js')
     mapboxgl.accessToken = accessToken
     el = new mapboxgl.Map({
       container,
