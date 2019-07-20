@@ -59,5 +59,7 @@
         const { position, options } = controls[control]
         controlTypes[control](position, options)
       })
+
+    el.on('load', () => dispatch('ready', { map: el }))
   })
 </script>
