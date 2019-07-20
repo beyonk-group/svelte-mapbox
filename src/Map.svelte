@@ -45,6 +45,13 @@
     }
   }
 
+  export function setCenter (center, zoom) {
+    el.setCenter(center)
+    if (zoom && Number.isInteger(zoom)) {
+      el.setZoom(zoom)
+    }
+  }
+
   onMount(async () => {
     const mbgl = await import('mapbox-gl/dist/mapbox-gl.js')
     mapboxgl = mbgl.default
