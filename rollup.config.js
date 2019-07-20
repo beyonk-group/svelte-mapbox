@@ -24,9 +24,8 @@ const plugins = [
 	svelte()
 ]
 
-const output = [
-	{ file: pkg.module, 'format': 'es' },
-	{ file: pkg.main, 'format': 'umd', name }
+let output = [
+	{ dir: 'dist', format: 'es', entryFileNames: 'components.mjs' }
 ]
 
 if (dev) {
@@ -49,11 +48,9 @@ if (dev) {
 			port: 12001
 		})
 	)
-	output.push(
-			...output.map(o => {
-				return { ...o, file: `dist/${o.file}` }
-			})
-	)
+	output = [
+		{ dir: 'dist', format: 'esm', entryFileNames: 'components.js' }
+	]
 }
 
 export default {
