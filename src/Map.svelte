@@ -45,7 +45,8 @@
   }
 
   onMount(async () => {
-    mapboxgl = await import('mapbox-gl/dist/mapbox-gl.js')
+    const mbgl = await import('mapbox-gl/dist/mapbox-gl.js')
+    mapboxgl = mbgl.default
     mapboxgl.accessToken = accessToken
     el = new mapboxgl.Map({
       container,

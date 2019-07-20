@@ -68,7 +68,6 @@
   import { onMount } from 'svelte'
 
   let input
-  let mapboxgl
   let query = null
   
   export let value = null
@@ -133,7 +132,6 @@
   }
 
   onMount(async () => {
-    mapboxgl = await import('mapbox-gl/dist/mapbox-gl.js')
     autocomplete({
       input,
       fetch: getAutocompleteResults,
