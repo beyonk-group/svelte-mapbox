@@ -18,6 +18,7 @@
   let el
   let mapboxgl
 
+  export let options = {}
   export let controls = {}
   export let accessToken
 
@@ -50,7 +51,8 @@
     mapboxgl.accessToken = accessToken
     el = new mapboxgl.Map({
       container,
-      style: 'mapbox://styles/mapbox/streets-v11'
+      style: 'mapbox://styles/mapbox/streets-v11',
+      ...options
     })
 
     el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
