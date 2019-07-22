@@ -9,36 +9,36 @@
     border: 1px solid rgba(50, 50, 50, 0.6);
   }
 
-  :global(.by-mb-autocomplete) * {
+  :global(.by-mb-autocomplete *) {
       font: inherit;
   }
 
-  :global(.by-mb-autocomplete) > div {
+  :global(.by-mb-autocomplete > div) {
     display: flex;
     padding: 12px;
   }
 
-  :global(.by-mb-autocomplete) > div > .place,
-  :global(.by-mb-autocomplete) > div > .context {
+  :global(.by-mb-autocomplete > div > .place),
+  :global(.by-mb-autocomplete > div > .context) {
     padding: 0 6px;
   }
   
-  :global(.by-mb-autocomplete) > div > .place {
+  :global(.by-mb-autocomplete > div > .place) {
     color: teal;
     font-weight: 700;
   }
 
-  :global(.by-mb-autocomplete) > div > .context {
+  :global(.by-mb-autocomplete > div > .context) {
     color: darkslategray;
   }
 
-  :global(.by-mb-autocomplete) > div:hover:not(.group),
-  :global(.by-mb-autocomplete) > div.selected {
+  :global(.by-mb-autocomplete > div:hover:not(.group)),
+  :global(.by-mb-autocomplete > div.selected) {
       background: #81ca91;
       cursor: pointer;
   }
 
-  :global(.by-mb-autocomplete) > div > .marker {
+  :global(.by-mb-autocomplete > div > .marker) {
     border-radius: 50% 50% 50% 0;
     border: 4px solid teal;
     width: 16px;
@@ -46,11 +46,11 @@
     transform: rotate(-45deg);
   }
 
-  :global(.by-mb-autocomplete) > div.selected > .marker {
+  :global(.by-mb-autocomplete > div.selected > .marker) {
     border-color: #fff;
   }
 
-  :global(.by-mb-autocomplete) > div > .marker::after {
+  :global(.by-mb-autocomplete > div > .marker::after) {
     content: '';
     width: 10px;
     height: 10px;
