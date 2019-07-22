@@ -1,4 +1,4 @@
-<input class={styleClass} bind:this={input} {placeholder} />
+<input class={styleClass} bind:this={input} bind:value={viewValue} {placeholder} />
 
 <style>
   :global(.by-mb-autocomplete) {
@@ -70,9 +70,8 @@
   const dispatch = createEventDispatcher()
 
   let input
-  let query = null
+  let viewValue = null
   
-  export let value = null
   export let placeholder = 'Enter Location'
   export let styleClass = ''
 
@@ -83,7 +82,7 @@
   export let minLength = 3
 
   function getSearchUrl () {
-    return `${apiUrl}/geocoding/v5/${endpoint}/${query}.json?access_token=${accessToken}&autocomplete=true`
+    return `${apiUrl}/geocoding/v5/${endpoint}/${viewValue}.json?access_token=${accessToken}&autocomplete=true`
   }
 
   function parseSuggestions (payload) {
@@ -112,8 +111,7 @@
   }
 
   function onSelect (item) {
-    input.value = item.label
-    value = item.geometry
+    viewValue = item.label
     dispatchEvent('place-changed', item)
   }
 
