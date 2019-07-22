@@ -24,23 +24,23 @@
   }
   
   :global(.by-mb-autocomplete > div > .place) {
-    color: teal;
+    color: rgba(6, 160, 146, 1);
     font-weight: 700;
   }
 
   :global(.by-mb-autocomplete > div > .context) {
-    color: darkslategray;
+    color: #565656;
   }
 
   :global(.by-mb-autocomplete > div:hover:not(.group)),
   :global(.by-mb-autocomplete > div.selected) {
-      background: #81ca91;
+      background: #b7e8e3;
       cursor: pointer;
   }
 
   :global(.by-mb-autocomplete > div > .marker) {
     border-radius: 50% 50% 50% 0;
-    border: 4px solid teal;
+    border: 4px solid rgba(6, 160, 146, 1);
     width: 16px;
     height: 16px;
     transform: rotate(-45deg);
