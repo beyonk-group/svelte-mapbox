@@ -10,7 +10,6 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@beyonk/rollup-plugin-generate-html-esm": "^0.1.1",
     "@beyonk/rollup-plugin-html-esm": "^1.0.2",
     "autocompleter": "^5.0.1",
     "rollup": "^1.16.1",
