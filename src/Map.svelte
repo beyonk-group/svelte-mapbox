@@ -53,6 +53,13 @@
     }
   }
 
+  export function popup (coordinates, html) {
+    new mapboxgl.Popup()
+      .setLngLat(coordinates)
+      .setHTML(html)
+      .addTo(el)
+  }
+
   onMount(async () => {
     const mbgl = await import('mapbox-gl/dist/mapbox-gl.js')
     mapboxgl = mbgl.default

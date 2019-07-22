@@ -51,7 +51,13 @@
           </div>
 					<div class="section-txt" id="map">
 						<div class="map-wrap">
-							<Map accessToken="%API_KEY%" controls={{ navigation: {}, geolocate: {} }} on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) } on:ready={e => cluster(e.detail.map)} />
+							<Map
+								bind:this={mapComponent}
+								accessToken="%API_KEY%"
+								controls={{ navigation: {}, geolocate: {} }}
+								on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) }
+								on:ready={e => cluster(e.detail.map)}	
+							/>
 						</div>
 						{#if center}
 							<dt>Geolocation:</dt>
@@ -94,6 +100,7 @@
   import './prettify.css'
   import './style.css'
 	import { Map, Geocoder } from '../src/components.js'
+	import MiniScroller from './MiniScroller.svelte'
 	import logo from './logo.svg'
 	
 	if (typeof window !== 'undefined') {
@@ -103,6 +110,7 @@
 	let page = 'about'
 	let place = null
 	let center
+	let mapComponent
 
 	function navigate (next) {
 		page = next
@@ -178,7 +186,6 @@
 				}
 		});
 
-		// inspect a cluster on click
 		map.on('click', 'clusters', function(e) {
 				var features = map.queryRenderedFeatures(e.point, {
 						layers: ['clusters']
@@ -200,6 +207,30 @@
 		});
 		map.on('mouseleave', 'clusters', function() {
 				map.getCanvas().style.cursor = '';
+		});
+
+		map.on('click', 'unclustered-point', function (e) {
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = e.features[0].properties.description;
+			
+			// Ensure that if the map is zoomed out such that multiple
+			// copies of the feature are visible, the popup appears
+			// over the copy being pointed to.
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			
+			map.setCenter(coordinates)
+			mapComponent.popup(coordinates, '<div id="mini-scroller"></div>')
+			new MiniScroller({ target: document.getElementById('mini-scroller'), props: {} })
+		});
+			
+		map.on('mouseenter', 'unclustered-point', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+			
+		map.on('mouseleave', 'unclustered-point', function () {
+			map.getCanvas().style.cursor = '';
 		});
 	}
 </script>
