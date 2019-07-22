@@ -1,4 +1,4 @@
-<input class={styleClass} bind:this={input} bind:value={query} {placeholder} />
+<input class={styleClass} bind:this={input} {placeholder} />
 
 <style>
   :global(.by-mb-autocomplete) {
@@ -65,7 +65,9 @@
 
 <script>
   import autocomplete from './autocompleter.js'
-  import { onMount } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   let input
   let query = null
@@ -111,7 +113,8 @@
 
   function onSelect (item) {
     input.value = item.label
-    value = item
+    value = item.geometry
+    dispatchEvent('place-changed', item)
   }
 
   function renderItem (item, currentValue) {
