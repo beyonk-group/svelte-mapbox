@@ -38,7 +38,7 @@
 				<div class="content-info">
 					<div class="section-txt" id="geocoder">
 						<form on:submit|preventDefault={() => console.log('form submitted') }>
-						<Geocoder accessToken="%API_KEY%" bind:value={place} />
+						<Geocoder accessToken="%API_KEY%" bind:value={place} on:place-changed={placeChanged} />
             {#if place}
               <dl>
 								<dt>Name:</dt>
@@ -114,6 +114,11 @@
 
 	function navigate (next) {
 		page = next
+	}
+
+	function placeChanged (e) {
+		place = e.detail
+		mapComponent.setCenter(e.detail.geometry, 14)
 	}
 	
 	function cluster (map) {

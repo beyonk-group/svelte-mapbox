@@ -87,11 +87,11 @@
 
   function parseSuggestions (payload) {
     return payload.features.map(p => {
-      const [ lat, lng ] = p.center
+      const [ lng, lat ] = p.center
       return {
         label: p.place_name,
         place: p.text,
-        context: p.context.map(c => c.text),
+        context: p.context ? p.context.map(c => c.text) : [ p.text ],
         geometry: {
           lat,
           lng
@@ -112,7 +112,7 @@
 
   function onSelect (item) {
     viewValue = item.label
-    dispatchEvent('place-changed', item)
+    dispatch('place-changed', item)
   }
 
   function renderItem (item, currentValue) {
