@@ -110,7 +110,7 @@
     })
   }
 
-  function clear () {
+  export function clear () {
     viewValue = null
     dispatch('clear')
   }
