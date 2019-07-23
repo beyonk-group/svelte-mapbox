@@ -53,8 +53,8 @@
     }
   }
 
-  export function popup (coordinates, html) {
-    new mapboxgl.Popup()
+  export function popup (coordinates, html, options = {}) {
+    new mapboxgl.Popup(options)
       .setLngLat(coordinates)
       .setHTML(html)
       .addTo(el)
