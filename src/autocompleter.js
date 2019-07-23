@@ -284,6 +284,7 @@
               return;
           }
           if (keyCode === 13 /* Enter */ && selected) {
+              if (containerDisplayed()) { ev.preventDefault() }
               settings.onSelect(selected, input);
               clear();
           }

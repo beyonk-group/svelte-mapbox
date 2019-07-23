@@ -38,7 +38,7 @@
 				<div class="content-info">
 					<div class="section-txt" id="geocoder">
 						<form on:submit|preventDefault={() => console.log('form submitted') }>
-						<Geocoder accessToken="%API_KEY%" bind:value={place} on:place-changed={placeChanged} />
+						<Geocoder accessToken="%API_KEY%" on:place-changed={placeChanged} />
             {#if place}
               <dl>
 								<dt>Name:</dt>
