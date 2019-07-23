@@ -110,6 +110,11 @@
     })
   }
 
+  function clear () {
+    viewValue = null
+    dispatch('clear')
+  }
+
   function onSelect (item) {
     viewValue = item.label
     dispatch('place-changed', item)
