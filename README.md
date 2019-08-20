@@ -58,10 +58,11 @@ The Geocoder is an autocompleting place lookup, which returns a lat and lng for 
 This implementation makes use of the Context API, so you can wrap custom components in the Map, and inside those components you can do:
 
 ```js
-import { mapbox, contextKey } from './mapbox.js'
+import { contextKey } from './mapbox.js'
 
-const { getMap } = getContext(contextKey)
+const { getMap, getMapbox } = getContext(contextKey)
 const map = getMap()
+const mapbox = getMapbox()
 ```
 
 * `map` is a reference to the Map object.

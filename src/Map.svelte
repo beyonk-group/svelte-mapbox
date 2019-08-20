@@ -13,16 +13,18 @@
 
 <script>
   import { onMount, createEventDispatcher, setContext } from 'svelte'
-  import { contextKey, mapbox } from './mapbox.js'
+  import { contextKey } from './mapbox.js'
 
   setContext(contextKey, {
-		getMap: () => map
+    getMap: () => map,
+    getMapbox: () => mapbox
 	})
 
   const dispatch = createEventDispatcher()
 
   let container
   let map
+  let mapbox
 
   export let options = {}
   export let accessToken
@@ -35,7 +37,9 @@
     }
   }
 
-  onMount(() => {
+  onMount(async () => {
+    const mapboxModule = await import('mapbox-gl')
+    mapbox = mapboxModule.default
     mapbox.accessToken = accessToken
 
     const link = document.createElement('link')

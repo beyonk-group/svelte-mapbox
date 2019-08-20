@@ -1,9 +1,10 @@
 <script>
 	import { getContext } from 'svelte'
-	import { mapbox, contextKey } from './mapbox.js'
+  import { contextKey } from '../mapbox.js'
 
-	const { getMap } = getContext(contextKey)
-	const map = getMap()
+	const { getMap, getMapbox } = getContext(contextKey)
+  const map = getMap()
+  const mapbox = getMapbox()
 
 	export let lat
 	export let lon

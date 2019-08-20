@@ -1,10 +1,11 @@
 <script>
   import { getContext, onMount } from 'svelte'
-  import { mapbox, contextKey } from '../src/components.js'
+  import { contextKey } from '../src/components.js'
   import MiniScroller from './MiniScroller.svelte'
 
-  const { getMap } = getContext(contextKey)
+	const { getMap, getMapbox } = getContext(contextKey)
   const map = getMap()
+  const mapbox = getMapbox()
 
   // Add a new source from our GeoJSON data and set the
   // 'cluster' option to true. GL-JS will add the point_count property to your source data.
