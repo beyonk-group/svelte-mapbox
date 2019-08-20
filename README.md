@@ -11,7 +11,67 @@ Maps and Geocoding (Autocomplete) components in Vanilla JS (or Svelte)
 * SSR Ready
 * Lightweight
 * No clientside dependencies
+* Allow creation of custom Svelte components on the map
 
 ## WIP
 
 Documentation is a WIP. 
+
+## Basic Usage (Map)
+
+The container component is the map, and there are a variety of components which go on the map.
+
+```jsx
+<Map
+  accessToken="<your api key>" // add your api key here
+  on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) } // recentre events
+>
+  <Earthquakes /> // Any custom component you create or want here - see marker example
+  <Marker lat={someLat} lng={someLng} /> // built in Marker component
+  <NavigationControl />
+  <GeolocateControl options={{ some: 'control-option' }} />
+  <ScalingControl />
+</Map>
+
+<script>
+  import { Map, Geocoder, controls } from '@beyonk/svelte-mapbox'
+	import Earthquakes from './Earthquakes.svelte' // custom component
+  
+  const { GeolocateControl, NavigationControl, ScalingControl } = controls
+</script>
+```
+
+## Basic Usage (Geocoder)
+
+The Geocoder is an autocompleting place lookup, which returns a lat and lng for a place.
+
+```jsx
+<Geocoder accessToken="<your api key>" on:place-changed={somePlaceChangeEvent} />
+
+<script>
+  import { Geocoder } from '@beyonk/svelte-mapbox'
+</script>
+```
+
+## Context API
+
+This implementation makes use of the Context API, so you can wrap custom components in the Map, and inside those components you can do:
+
+```js
+import { mapbox, contextKey } from './mapbox.js'
+
+const { getMap } = getContext(contextKey)
+const map = getMap()
+```
+
+* `map` is a reference to the Map object.
+* `mapbox` is a reference to the mapbox library.
+
+## Demo
+
+To see the earthquakes demo:
+
+`
+npm run dev
+`
+

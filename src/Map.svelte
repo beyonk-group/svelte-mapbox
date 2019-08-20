@@ -1,8 +1,10 @@
-<div bind:this={container}></div>
+<div bind:this={container}>
+  {#if map}
+  <slot></slot>
+  {/if}
+</div>
 
 <style>
-  @import '//api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css';
-
   div {
     width: 100%;
     height: 100%;
@@ -10,41 +12,21 @@
 </style>
 
 <script>
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { onMount, createEventDispatcher, setContext } from 'svelte'
+  import { contextKey, mapbox } from './mapbox.js'
+
+  setContext(contextKey, {
+		getMap: () => map
+	})
 
   const dispatch = createEventDispatcher()
 
   let container
-  let el
-  let mapboxgl
+  let map
 
   export let options = {}
-  export let controls = {}
   export let accessToken
   export let style = 'mapbox://styles/mapbox/streets-v11'
-
-  const controlTypes = {
-    scaling: (position = 'bottom-right', options = {}) => {
-      const scale = new mapboxgl.ScaleControl({
-        maxWidth: 80,
-        unit: 'metric',
-        ...options
-      })
-      el.addControl(scale, position)
-    },
-    navigation: (position = 'top-right', options = {}) => {
-      const nav = new mapboxgl.NavigationControl({
-        ...options
-      })
-      el.addControl(nav, position)
-    },
-    geolocate: (position = 'top-left', options = {}) => {
-      const geolocate = new mapboxgl.GeolocateControl({
-        ...options
-      })
-      el.addControl(geolocate, position)
-    }
-  }
 
   export function setCenter (center, zoom) {
     el.setCenter(center)
@@ -53,32 +35,35 @@
     }
   }
 
-  export function popup (coordinates, html, options = {}) {
-    new mapboxgl.Popup(options)
-      .setLngLat(coordinates)
-      .setHTML(html)
-      .addTo(el)
-  }
+  onMount(() => {
+    mapbox.accessToken = accessToken
 
-  onMount(async () => {
-    const mbgl = await import('mapbox-gl/dist/mapbox-gl.js')
-    mapboxgl = mbgl.default
-    mapboxgl.accessToken = accessToken
-    el = new mapboxgl.Map({
-      container,
-      style,
-      ...options
-    })
+    const link = document.createElement('link')
+		link.rel = 'stylesheet'
+		link.href = 'https://unpkg.com/mapbox-gl/dist/mapbox-gl.css'
 
-    el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
+    let el
 
-    Object
-      .keys(controls)
-      .forEach(control => {
-        const { position, options } = controls[control]
-        controlTypes[control](position, options)
+		link.onload = () => {
+      el = new mapbox.Map({
+        container,
+        style,
+        ...options
       })
 
-    el.on('load', () => dispatch('ready', { map: el }))
+      el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
+
+      el.on('load', () => {
+        map = el
+        dispatch('ready')
+      })
+    }
+
+    document.head.appendChild(link)
+
+    return () => {
+      map.remove()
+      link.parentNode.removeChild(link)
+    }
   })
 </script>
