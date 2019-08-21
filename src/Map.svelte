@@ -31,14 +31,16 @@
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
   export function setCenter (center, zoom) {
-    map.setCenter(center)
-    if (zoom && Number.isInteger(zoom)) {
-      el.setZoom(zoom)
+    if (map) {
+      map.setCenter(center)
+      if (zoom && Number.isInteger(zoom)) {
+        map.setZoom(zoom)
+      }
     }
   }
 
   export function resize () {
-    map.resize()
+    map && map.resize()
   }
 
   onMount(async () => {
