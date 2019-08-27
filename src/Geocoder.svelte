@@ -1,4 +1,4 @@
-<input class={styleClass} bind:this={input} bind:value={value} {placeholder} />
+<input class={styleClass} bind:this={input} bind:value={value} {placeholder} aria-label={label} />
 
 <style>
   :global(.by-mb-autocomplete) {
@@ -71,6 +71,7 @@
 
   let input
   
+  export let label = 'Search location'
   export let value = null
   export let placeholder = 'Enter Location'
   export let styleClass = ''

@@ -46,12 +46,14 @@ The container component is the map, and there are a variety of components which 
 The Geocoder is an autocompleting place lookup, which returns a lat and lng for a place.
 
 ```jsx
-<Geocoder accessToken="<your api key>" on:place-changed={somePlaceChangeEvent} />
+<Geocoder accessToken="<your api key>" on:place-changed={somePlaceChangeEvent} label="Some Label" />
 
 <script>
   import { Geocoder } from '@beyonk/svelte-mapbox'
 </script>
 ```
+
+Note the label prop is used for `aria-*` attributes on the search input, this component doesn't have a label.
 
 ## Context API
 
