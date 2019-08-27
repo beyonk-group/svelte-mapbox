@@ -53,7 +53,7 @@ The Geocoder is an autocompleting place lookup, which returns a lat and lng for 
 </script>
 ```
 
-Note the label prop is used for `aria-*` attributes on the search input, this component doesn't have a label.
+Note the label prop is used for `aria-*` attributes on the search input, this component doesn't have a built-in label.
 
 ## Context API
 
