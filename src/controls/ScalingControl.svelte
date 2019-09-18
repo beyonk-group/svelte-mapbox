@@ -9,10 +9,11 @@
   export let position = 'bottom-right'
   export let options = {}
   
-  const scale = new mapbox.ScaleControl({
+  const optionsWithDefaults = Object.assign({
     maxWidth: 80,
     unit: 'metric',
-    ...options
-  })
+  }, options)
+
+  const scale = new mapbox.ScaleControl(optionsWithDefaults)
   map.addControl(scale, position)
 </script>

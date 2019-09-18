@@ -9,8 +9,6 @@
   export let position = 'top-left'
   export let options = {}
   
-  const geolocate = new mapbox.GeolocateControl({
-    ...options
-  })
+  const geolocate = new mapbox.GeolocateControl(options)
   map.addControl(geolocate, position)
 </script>

@@ -55,11 +55,11 @@
     let el
 
 		link.onload = () => {
-      el = new mapbox.Map({
+      const optionsWithDefaults = Object.assign({
         container,
-        style,
-        ...options
-      })
+        style
+      }, options)
+      el = new mapbox.Map(optionsWithDefaults)
 
       el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
 
