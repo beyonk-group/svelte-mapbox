@@ -16,6 +16,7 @@
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-fill-html": "^1.1.0",
     "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-replace": "^2.2.0",
@@ -41,6 +42,7 @@
     "dist"
   ],
   "dependencies": {
-    "mapbox-gl": "^1.2.1"
+    "@mapbox/mapbox-gl-geocoder": "^4.5.0",
+    "mapbox-gl": "^1.5.0"
   }
 }

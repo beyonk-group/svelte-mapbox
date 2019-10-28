@@ -8,6 +8,7 @@ import html from '@beyonk/rollup-plugin-html-esm'
 import replace from 'rollup-plugin-replace'
 import svg from 'rollup-plugin-svg'
 import json from 'rollup-plugin-json'
+import builtins from 'rollup-plugin-node-builtins'
 
 const name = pkg.name
 	.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
@@ -17,8 +18,12 @@ const name = pkg.name
 const dev = process.env.NODE_ENV === 'development'
 
 const plugins = [
-	json(),
-	resolve(),
+  json(),
+  builtins(),
+	resolve({
+    browser: true,
+    preferBuiltins: true
+  }),
 	commonjs(),
 	css(),
 	svelte()
