@@ -61,7 +61,10 @@
       .on('loading', onLoading)
       .on('error', onError)
       .on('clear', onClear)
-      .query(value)
+
+    if (value) {
+      geocoder.setInput(value)
+    }
 
     dispatch('ready')
   }
