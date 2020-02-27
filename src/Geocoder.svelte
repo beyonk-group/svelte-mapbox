@@ -10,6 +10,8 @@
   export let options
   export let version = 'v4.5.1'
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
+  export let placeholder = 'Search'
+  export let value = null
 
   let container
   let geocoder
@@ -18,6 +20,7 @@
   const onResults = p => dispatch('results', p)
   const onError = p => dispatch('error', p)
   const onLoading = p => dispatch('loading', p)
+  const onClear = p => dispatch('clear', p)
 
   onMount(() => {
     loader(
@@ -37,6 +40,7 @@
         .off('result', onResult)
         .off('loading', onLoading)
         .off('error', onError)
+        .off('clear', onClear)
       link.parentNode.removeChild(link)
     }
   })
@@ -44,17 +48,20 @@
   function onAvailable () {
     const optionsWithDefaults = Object.assign({
         accessToken,
-        types: types.join(',')
+        types: types.join(','),
+        placeholder
       }, options)
     geocoder = new MapboxGeocoder(optionsWithDefaults)
     geocoder
       .addTo(`.${container.className}`)
-
+    
     geocoder
       .on('results', onResults)
       .on('result', onResult)
       .on('loading', onLoading)
       .on('error', onError)
+      .on('clear', onClear)
+      .query(value)
 
     dispatch('ready')
   }

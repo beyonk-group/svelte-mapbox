@@ -55,11 +55,11 @@ The Geocoder is an autocompleting place lookup, which returns a lat and lng for 
 </script>
 ```
 
-The geocoder has four events you can subscribe to: `on:loading`, `on:result`, `on:results`, and `on:error` which are [documented here](https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md#on)
+The geocoder has five events you can subscribe to: `on:loading`, `on:result`, `on:results`, `on:clear`, and `on:error` which are [documented here](https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md#on)
 
 The most important event is `on:result` which is fired when a user selects an autocomplete result.
 
-There is a fifth event specific to this library, which is `on:ready`, which is fired when the component is ready for use. You can likely ignore it.
+There is a sixth event specific to this library, which is `on:ready`, which is fired when the component is ready for use. You can likely ignore it.
 
 ## Demo
 
