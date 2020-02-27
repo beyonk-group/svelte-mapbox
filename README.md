@@ -10,8 +10,10 @@ Maps and Geocoding (Autocomplete) components in Vanilla JS (or Svelte)
 
 * SSR Ready
 * Lightweight
-* No clientside dependencies
+* No clientside dependencies (Map)
 * Allow creation of custom Svelte components on the map
+
+* Note that the GeoCoder has a clientside dependency, since it appears to be extremely difficult to bundle.
 
 ## WIP
 
@@ -46,29 +48,18 @@ The container component is the map, and there are a variety of components which 
 The Geocoder is an autocompleting place lookup, which returns a lat and lng for a place.
 
 ```jsx
-<Geocoder accessToken="<your api key>" on:place-changed={somePlaceChangeEvent} label="Some Label" />
+<Geocoder accessToken="<your api key>" on:result={somePlaceChangeFunction} />
 
 <script>
   import { Geocoder } from '@beyonk/svelte-mapbox'
 </script>
 ```
 
-Note the label prop is used for `aria-*` attributes on the search input, this component doesn't have a built-in label.
+The geocoder has four events you can subscribe to: `on:loading`, `on:result`, `on:results`, and `on:error` which are [documented here](https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md#on)
 
-## Context API
+The most important event is `on:result` which is fired when a user selects an autocomplete result.
 
-This implementation makes use of the Context API, so you can wrap custom components in the Map, and inside those components you can do:
-
-```js
-import { contextKey } from './mapbox.js'
-
-const { getMap, getMapbox } = getContext(contextKey)
-const map = getMap()
-const mapbox = getMapbox()
-```
-
-* `map` is a reference to the Map object.
-* `mapbox` is a reference to the mapbox library.
+There is a fifth event specific to this library, which is `on:ready`, which is fired when the component is ready for use. You can likely ignore it.
 
 ## Demo
 

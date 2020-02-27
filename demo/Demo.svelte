@@ -38,7 +38,7 @@
 				<div class="content-info">
 					<div class="section-txt" id="geocoder">
 						<form on:submit|preventDefault={() => console.log('form submitted') }>
-						<Geocoder accessToken="%API_KEY%" on:place-changed={placeChanged} />
+						<Geocoder accessToken="%API_KEY%" on:result={placeChanged} />
             {#if place}
               <dl>
 								<dt>Name:</dt>
@@ -121,7 +121,7 @@
 	}
 
 	function placeChanged (e) {
-		place = e.detail
-		mapComponent.setCenter(e.detail.geometry, 14)
+    const { result } = e.detail
+		mapComponent.setCenter(result.center, 14)
 	}
 </script>

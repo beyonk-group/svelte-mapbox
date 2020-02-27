@@ -41,6 +41,8 @@
     "dist"
   ],
   "dependencies": {
-    "mapbox-gl": "^1.2.1"
+    "@beyonk/async-script-loader": "^1.0.3",
+    "@mapbox/mapbox-gl-geocoder": "^4.5.1",
+    "mapbox-gl": "^1.8.1"
   }
 }

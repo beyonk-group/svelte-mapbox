@@ -50,7 +50,7 @@
 
     const link = document.createElement('link')
 		link.rel = 'stylesheet'
-		link.href = 'https://unpkg.com/mapbox-gl/dist/mapbox-gl.css'
+		link.href = '//api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css'
 
     let el
 
