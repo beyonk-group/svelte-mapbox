@@ -26,6 +26,7 @@ The container component is the map, and there are a variety of components which 
 ```jsx
 <Map
   accessToken="<your api key>" // add your api key here
+  bind:this={mapComponent} // Get reference to your map component to use methods
   on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) } // recentre events
 >
   <Earthquakes /> // Any custom component you create or want here - see marker example
@@ -40,9 +41,12 @@ The container component is the map, and there are a variety of components which 
 	import Earthquakes from './Earthquakes.svelte' // custom component
   
   const { GeolocateControl, NavigationControl, ScalingControl } = controls
+
+  // Usage of methods like setCenter and flyto
+  mapComponent.setCenter([lng,lat],zoom) // zoom is optional
+  mapComponent.flyTo({center:[lng,lat]}) // documentation (https://docs.mapbox.com/mapbox-gl-js/example/flyto)
 </script>
 ```
-
 ## Basic Usage (Geocoder)
 
 The Geocoder is an autocompleting place lookup, which returns a lat and lng for a place.

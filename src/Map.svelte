@@ -39,6 +39,13 @@
     }
   }
 
+  // Fly to a perticular location
+  export function flyTo(destination) {
+    if (map) {
+      map.flyTo(destination);
+    }
+  }
+
   export function resize () {
     map && map.resize()
   }
