@@ -36,6 +36,7 @@
 					</div>
 				</aside>
 				<div class="content-info">
+		  			<button id="fly-to" on:click={flyToRandomPlace}>Fly to random location</button>
 					<div class="section-txt" id="geocoder">
 						<form on:submit|preventDefault={() => console.log('form submitted') }>
 						<Geocoder accessToken="%API_KEY%" on:result={placeChanged} />
@@ -95,6 +96,20 @@
 		width: 100%;
 		height: 300px;
 	}
+	#fly-to{
+		display: block;
+        position: relative;
+        margin: 0px auto;
+        width: 50%;
+        height: 40px;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        background: #ee8a65;
+	}
 </style>
 
 <script>
@@ -124,4 +139,10 @@
     const { result } = e.detail
 		mapComponent.setCenter(result.center, 14)
 	}
+	function flyToRandomPlace (){
+		mapComponent.flyTo({center:[
+				77 + (Math.random() - 0.5) * 30,
+				13 + (Math.random() - 0.5) * 30
+			],essential:true})
+		}
 </script>
