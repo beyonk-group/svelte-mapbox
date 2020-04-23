@@ -22,8 +22,9 @@
 
   const dispatch = createEventDispatcher()
 
+  export let map = null
+
   let container
-  let map
   let mapbox
 
   export let options = {}
@@ -39,7 +40,6 @@
     }
   }
 
-  // Fly to a perticular location
   export function flyTo(destination) {
     map && map.flyTo(destination)
   }

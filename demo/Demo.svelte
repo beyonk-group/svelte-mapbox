@@ -138,11 +138,15 @@
 	function placeChanged (e) {
     const { result } = e.detail
 		mapComponent.setCenter(result.center, 14)
-	}
-	function flyToRandomPlace (){
-		mapComponent.flyTo({center:[
+  }
+  
+	function flyToRandomPlace () {
+		mapComponent.flyTo({
+      center: [
 				77 + (Math.random() - 0.5) * 30,
 				13 + (Math.random() - 0.5) * 30
-			],essential:true})
-		}
+      ],
+      essential:true
+    })
+	}
 </script>
