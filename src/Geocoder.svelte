@@ -13,8 +13,10 @@
   export let placeholder = 'Search'
   export let value = null
 
+  export let geocoder = null
+
   let container
-  let geocoder
+  let ready = false
 
   const onResult = p => dispatch('result', p)
   const onResults = p => dispatch('results', p)
@@ -62,12 +64,13 @@
       .on('error', onError)
       .on('clear', onClear)
 
-    if (value) {
-      geocoder.setInput(value)
-    }
+    geocoder.setInput(value)
 
+    ready = true
     dispatch('ready')
   }
+
+  $: ready && value && geocoder.setInput(value)
 </script>
 
 <style>
