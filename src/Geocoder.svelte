@@ -7,7 +7,7 @@
   const dispatch = createEventDispatcher()
 
   export let accessToken
-  export let options
+  export let options = {}
   export let version = 'v4.5.1'
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
