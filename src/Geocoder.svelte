@@ -8,7 +8,7 @@
 
   export let accessToken
   export let options = {}
-  export let version = 'v4.5.1'
+  export let version = 'v4.5.2'
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
   export let value = null
@@ -33,7 +33,7 @@
 
     const link = document.createElement('link')
 		link.rel = 'stylesheet'
-    link.href = '//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css'
+    link.href = `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css`
     document.head.appendChild(link)
 
     return () => {
@@ -54,8 +54,7 @@
         placeholder
       }, options)
     geocoder = new MapboxGeocoder(optionsWithDefaults)
-    geocoder
-      .addTo(`.${container.className}`)
+    geocoder.addTo(container)
     
     geocoder
       .on('results', onResults)
