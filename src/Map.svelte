@@ -12,6 +12,7 @@
 </style>
 
 <script>
+  import loader from '@beyonk/async-script-loader'
   import { onMount, createEventDispatcher, setContext } from 'svelte'
   import { contextKey } from './mapbox.js'
 
@@ -23,6 +24,7 @@
   const dispatch = createEventDispatcher()
 
   export let map = null
+  export let version = 'v1.10.0'
 
   let container
   let mapbox
@@ -48,37 +50,39 @@
     map && map.resize()
   }
 
+  export function getMap () {
+    return map
+  }
+
+  function onAvailable () {
+    mapbox = mapboxgl
+    mapboxgl.accessToken = accessToken
+    const optionsWithDefaults = Object.assign({
+      container,
+      style
+    }, options)
+
+    const el = new mapbox.Map(optionsWithDefaults)
+
+    el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
+
+    el.on('load', () => {
+      map = el
+      dispatch('ready')
+    })
+  }
+
   onMount(async () => {
-    const mapboxModule = await import('mapbox-gl')
-    mapbox = mapboxModule.default
-    mapbox.accessToken = accessToken
-
-    const link = document.createElement('link')
-		link.rel = 'stylesheet'
-		link.href = '//api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css'
-
-    let el
-
-		link.onload = () => {
-      const optionsWithDefaults = Object.assign({
-        container,
-        style
-      }, options)
-      el = new mapbox.Map(optionsWithDefaults)
-
-      el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
-
-      el.on('load', () => {
-        map = el
-        dispatch('ready')
-      })
-    }
-
-    document.head.appendChild(link)
+    loader([
+        { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.js` },
+        { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css` }
+      ],
+      () => !!window.mapboxgl,
+      onAvailable
+    )
 
     return () => {
       map.remove()
-      link.parentNode.removeChild(link)
     }
   })
 </script>
