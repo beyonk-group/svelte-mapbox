@@ -1,4 +1,4 @@
-<div bind:this={container} />
+<div bind:this={container} id={fieldId} />
 
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
@@ -6,9 +6,11 @@
 
   const dispatch = createEventDispatcher()
 
+  const fieldId = 'bsm-'+Math.random().toString(36).substring(6)
+
   export let accessToken
   export let options = {}
-  export let version = 'v4.5.2'
+  export let version = 'v4.5.1'
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
   export let value = null
@@ -25,16 +27,13 @@
   const onClear = p => dispatch('clear', p)
 
   onMount(() => {
-    loader(
-      `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.min.js`,
+    loader([
+        { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.min.js` },
+        { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css` }
+      ],
       () => !!window.MapboxGeocoder,
       onAvailable
     )
-
-    const link = document.createElement('link')
-		link.rel = 'stylesheet'
-    link.href = `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css`
-    document.head.appendChild(link)
 
     return () => {
       geocoder
@@ -43,7 +42,6 @@
         .off('loading', onLoading)
         .off('error', onError)
         .off('clear', onClear)
-      link.parentNode.removeChild(link)
     }
   })
 
@@ -54,7 +52,7 @@
         placeholder
       }, options)
     geocoder = new MapboxGeocoder(optionsWithDefaults)
-    geocoder.addTo(container)
+    geocoder.addTo(`#${fieldId}`)
     
     geocoder
       .on('results', onResults)
