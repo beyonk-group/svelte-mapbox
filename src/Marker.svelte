@@ -4,13 +4,18 @@
 
 	const { getMap, getMapbox } = getContext(contextKey)
   const map = getMap()
-  const mapbox = getMapbox()
+	const mapbox = getMapbox()
+	
+	function randomColour () {
+		return Math.round(Math.random() * 255)
+	}
 
 	export let lat
 	export let lng
 	export let label = 'Marker'
 	export let lon
 	export let popupClassName = 'beyonk-mapbox-popup'
+	export let color = randomColour()
 
 	const popup = new mapbox.Popup({
 		offset: 25,
@@ -18,7 +23,9 @@
 	})
 	.setText(label)
 
-	const marker = new mapbox.Marker()
+	const marker = new mapbox.Marker({
+			color
+		})
 		.setLngLat([lng || lon, lat])
 		.setPopup(popup)
 		.addTo(map)
