@@ -7,14 +7,19 @@
   const mapbox = getMapbox()
 
 	export let lat
+	export let lng
+	export let label = 'Marker'
 	export let lon
-	export let label
+	export let popupClassName = 'beyonk-mapbox-popup'
 
-	const popup = new mapbox.Popup({ offset: 25 })
-		.setText(label)
+	const popup = new mapbox.Popup({
+		offset: 25,
+		className: popupClassName
+	})
+	.setText(label)
 
 	const marker = new mapbox.Marker()
-		.setLngLat([lon, lat])
+		.setLngLat([lng || lon, lat])
 		.setPopup(popup)
 		.addTo(map)
 </script>

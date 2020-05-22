@@ -56,10 +56,12 @@
 								bind:this={mapComponent}
 								accessToken="%API_KEY%"
 								on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) }
+								options={{ center }}
 							>
 								<Earthquakes />
                 <NavigationControl />
                 <GeolocateControl />
+								<Marker lat={center.lat} lon={center.lng} />
 							</Map>
 						</div>
 						{#if center}
@@ -116,7 +118,7 @@
   import './normalize.css'
   import './prettify.css'
   import './style.css'
-  import { Map, Geocoder, controls } from '../src/components.js'
+  import { Map, Geocoder, Marker, controls } from '../src/components.js'
 	import Earthquakes from './Earthquakes.svelte'
   import logo from './logo.svg'
   
@@ -128,7 +130,7 @@
 
 	let page = 'about'
 	let place = null
-	let center
+	let center = { lng: randomLng(), lat: randomLat() }
 	let mapComponent
 
 	function navigate (next) {
@@ -138,13 +140,21 @@
 	function placeChanged (e) {
     const { result } = e.detail
 		mapComponent.setCenter(result.center, 14)
-  }
+	}
+	
+	function randomLng () {
+		return 77 + (Math.random() - 0.5) * 30
+	}
+
+	function randomLat () {
+		return 13 + (Math.random() - 0.5) * 30
+	}
   
 	function flyToRandomPlace () {
 		mapComponent.flyTo({
       center: [
-				77 + (Math.random() - 0.5) * 30,
-				13 + (Math.random() - 0.5) * 30
+				randomLng(),
+				randomLat()
       ],
       essential:true
     })
