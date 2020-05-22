@@ -30,14 +30,14 @@ The container component is the map, and there are a variety of components which 
   on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) } // recentre events
 >
   <Earthquakes /> // Any custom component you create or want here - see marker example
-  <Marker lat={someLat} lng={someLng} /> // built in Marker component
+  <Marker lat={someLat} lng={someLng} label="some marker label" popupClassName="class-name" /> // built in Marker component
   <NavigationControl />
   <GeolocateControl options={{ some: 'control-option' }} />
   <ScalingControl />
 </Map>
 
 <script>
-  import { Map, Geocoder, controls } from '@beyonk/svelte-mapbox'
+  import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox'
 	import Earthquakes from './Earthquakes.svelte' // custom component
   
   const { GeolocateControl, NavigationControl, ScalingControl } = controls
