@@ -13,11 +13,15 @@ Maps and Geocoding (Autocomplete) components in Vanilla JS (or Svelte)
 * No clientside dependencies (Map)
 * Allow creation of custom Svelte components on the map
 
-* Note that the GeoCoder has a clientside dependency, since it appears to be extremely difficult to bundle.
+* Note that the GeoCoder has a clientside dependency, since it adds about 0.5mb to the bundle size, and significant time to the build time if bundled.
 
-## WIP
+## Installing
 
-Documentation is a WIP. 
+**It is PARAMOUNT that you install this as a development dependency, not a runtime dependency. It won't work otherwise. Svelte bundles everything, so you should need any runtime dependencies at all**
+
+```
+npm install --save-dev @beyonk/svelte-mapbox
+```
 
 ## Basic Usage (Map)
 
