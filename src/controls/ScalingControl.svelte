@@ -3,17 +3,17 @@
 	import { contextKey } from '../mapbox.js'
 
 	const { getMap, getMapbox } = getContext(contextKey)
-  const map = getMap()
-  const mapbox = getMapbox()
+	const map = getMap()
+	const mapbox = getMapbox()
 
-  export let position = 'bottom-right'
-  export let options = {}
-  
-  const optionsWithDefaults = Object.assign({
-    maxWidth: 80,
-    unit: 'metric',
-  }, options)
+	export let position = 'bottom-right'
+	export let options = {}
 
-  const scale = new mapbox.ScaleControl(optionsWithDefaults)
-  map.addControl(scale, position)
+	const optionsWithDefaults = Object.assign({
+	  maxWidth: 80,
+	  unit: 'metric'
+	}, options)
+
+	const scale = new mapbox.ScaleControl(optionsWithDefaults)
+	map.addControl(scale, position)
 </script>
