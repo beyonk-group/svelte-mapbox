@@ -15,6 +15,7 @@
   import loader from '@beyonk/async-script-loader'
   import { onMount, createEventDispatcher, setContext } from 'svelte'
   import { contextKey } from './mapbox.js'
+  import { EventQueue } from './queue.js'
 
   setContext(contextKey, {
     getMap: () => map,
@@ -24,30 +25,29 @@
   const dispatch = createEventDispatcher()
 
   export let map = null
-  export let version = 'v1.10.0'
+  export let version = 'v1.11.0'
 
   let container
   let mapbox
+  let queue
 
   export let options = {}
   export let accessToken
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
   export function setCenter (center, zoom) {
-    if (map) {
-      map.setCenter(center)
-      if (zoom && Number.isInteger(zoom)) {
-        map.setZoom(zoom)
-      }
+    queue.send('setCenter', [ center ])
+    if (zoom && Number.isInteger(zoom)) {
+      queue.send('setZoom', [ zoom ])
     }
   }
 
   export function flyTo(destination) {
-    map && map.flyTo(destination)
+    queue.send('flyTo', [ destination ])
   }
 
   export function resize () {
-    map && map.resize()
+    queue.send('resize')
   }
 
   export function getMap () {
@@ -68,11 +68,20 @@
 
     el.on('load', () => {
       map = el
+      queue.start()
       dispatch('ready')
     })
   }
 
+ function worker (cmd, cb) {
+    const [ command, params ] = cmd
+    map[command].apply(map, params)
+    cb(null)
+  }
+
   onMount(async () => {
+    queue = new EventQueue(worker)
+
     loader([
         { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.js` },
         { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css` }
@@ -82,6 +91,7 @@
     )
 
     return () => {
+      queue.stop()
       map.remove()
     }
   })

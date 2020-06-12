@@ -41,6 +41,7 @@
     "dist"
   ],
   "dependencies": {
-    "@beyonk/async-script-loader": "^2.0.0"
+    "@beyonk/async-script-loader": "^2.0.0",
+    "fastq": "^1.8.0"
   }
 }
