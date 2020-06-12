@@ -6,7 +6,7 @@
 
   const dispatch = createEventDispatcher()
 
-  const fieldId = 'bsm-'+Math.random().toString(36).substring(6)
+  const fieldId = 'bsm-' + Math.random().toString(36).substring(6)
 
   export let accessToken
   export let options = {}
@@ -28,11 +28,11 @@
 
   onMount(() => {
     loader([
-        { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.min.js` },
-        { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css` }
-      ],
-      () => !!window.MapboxGeocoder,
-      onAvailable
+      { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.min.js` },
+      { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css` }
+    ],
+    () => !!window.MapboxGeocoder,
+    onAvailable
     )
 
     return () => {
@@ -47,13 +47,13 @@
 
   function onAvailable () {
     const optionsWithDefaults = Object.assign({
-        accessToken,
-        types: types.join(','),
-        placeholder
-      }, options)
-    geocoder = new MapboxGeocoder(optionsWithDefaults)
+      accessToken,
+      types: types.join(','),
+      placeholder
+    }, options)
+    geocoder = new window.MapboxGeocoder(optionsWithDefaults)
     geocoder.addTo(`#${fieldId}`)
-    
+  
     geocoder
       .on('results', onResults)
       .on('result', onResult)

@@ -1,13 +1,13 @@
 <script>
 	import { getContext } from 'svelte'
-  import { contextKey } from './mapbox.js'
+	import { contextKey } from './mapbox.js'
 
 	const { getMap, getMapbox } = getContext(contextKey)
-  const map = getMap()
+	const map = getMap()
 	const mapbox = getMapbox()
 	
 	function randomColour () {
-		return Math.round(Math.random() * 255)
+	  return Math.round(Math.random() * 255)
 	}
 
 	export let lat
@@ -18,15 +18,15 @@
 	export let color = randomColour()
 
 	const popup = new mapbox.Popup({
-		offset: 25,
-		className: popupClassName
+	  offset: 25,
+	  className: popupClassName
 	})
-	.setText(label)
+	  .setText(label)
 
-	const marker = new mapbox.Marker({
-			color
-		})
-		.setLngLat([lng || lon, lat])
-		.setPopup(popup)
-		.addTo(map)
+	new mapbox.Marker({
+	  color
+	})
+	  .setLngLat([ lng || lon, lat ])
+	  .setPopup(popup)
+	  .addTo(map)
 </script>

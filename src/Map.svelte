@@ -20,7 +20,7 @@
   setContext(contextKey, {
     getMap: () => map,
     getMapbox: () => mapbox
-	})
+  })
 
   const dispatch = createEventDispatcher()
 
@@ -42,7 +42,7 @@
     }
   }
 
-  export function flyTo(destination) {
+  export function flyTo (destination) {
     queue.send('flyTo', [ destination ])
   }
 
@@ -55,8 +55,8 @@
   }
 
   function onAvailable () {
-    mapbox = mapboxgl
-    mapboxgl.accessToken = accessToken
+    window.mapboxgl.accessToken = accessToken
+    mapbox = window.mapboxgl
     const optionsWithDefaults = Object.assign({
       container,
       style
@@ -73,7 +73,7 @@
     })
   }
 
- function worker (cmd, cb) {
+function worker (cmd, cb) {
     const [ command, params ] = cmd
     map[command].apply(map, params)
     cb(null)
@@ -83,11 +83,11 @@
     queue = new EventQueue(worker)
 
     loader([
-        { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.js` },
-        { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css` }
-      ],
-      () => !!window.mapboxgl,
-      onAvailable
+      { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.js` },
+      { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css` }
+    ],
+    () => !!window.mapboxgl,
+    onAvailable
     )
 
     return () => {
