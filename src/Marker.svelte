@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte'
 	import { getContext } from 'svelte'
 	import { contextKey } from './mapbox.js'
 
@@ -17,16 +18,22 @@
 	export let popupClassName = 'beyonk-mapbox-popup'
 	export let color = randomColour()
 
-	const popup = new mapbox.Popup({
-	  offset: 25,
-	  className: popupClassName
-	})
-	  .setText(label)
+	let marker = null
 
-	new mapbox.Marker({
-	  color
+	onMount(() => {
+	  const popup = new mapbox.Popup({
+	    offset: 25,
+	    className: popupClassName
+	  })
+	    .setText(label)
+
+	  marker = new mapbox.Marker({
+	    color
+	  })
+	    .setLngLat([ lng || lon, lat ])
+	    .setPopup(popup)
+	    .addTo(map)
+
+	  return () => marker.remove()
 	})
-	  .setLngLat([ lng || lon, lat ])
-	  .setPopup(popup)
-	  .addTo(map)
 </script>
