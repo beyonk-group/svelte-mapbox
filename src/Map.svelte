@@ -41,6 +41,9 @@
       queue.send('setZoom', [ zoom ])
     }
   }
+  export function fitBounds (bbox) {
+    queue.send('fitBounds', [ bbox ])
+  }
 
   export function flyTo (destination) {
     queue.send('flyTo', [ destination ])
@@ -52,6 +55,10 @@
 
   export function getMap () {
     return map
+  }
+
+  export function getMapbox () {
+    return mapbox
   }
 
   function onAvailable () {
