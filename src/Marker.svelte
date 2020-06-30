@@ -37,7 +37,7 @@
 	  return () => marker.remove()
 	})
 
-	export function getMarker() {
-	  return marker;
+	export function getMarker () {
+	  return marker
 	}
 </script>
