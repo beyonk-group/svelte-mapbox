@@ -57,6 +57,10 @@
     return map
   }
 
+  export function getMapbox () {
+    return mapbox
+  }
+
   function onAvailable () {
     window.mapboxgl.accessToken = accessToken
     mapbox = window.mapboxgl
