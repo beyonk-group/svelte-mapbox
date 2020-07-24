@@ -14,7 +14,6 @@
 	export let lat
 	export let lng
 	export let label = 'Marker'
-	export let lon
 	export let popupClassName = 'beyonk-mapbox-popup'
 	export let color = randomColour()
 
@@ -30,7 +29,7 @@
 	  marker = new mapbox.Marker({
 	    color
 	  })
-	    .setLngLat([ lon, lat ])
+	    .setLngLat([ lng, lat ])
 	    .setPopup(popup)
 	    .addTo(map)
 
