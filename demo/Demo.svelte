@@ -61,7 +61,7 @@
 								<Earthquakes />
                 <NavigationControl />
                 <GeolocateControl />
-								<Marker lat={center.lat} lon={center.lng} />
+								<Marker lat={center.lat} lng={center.lng} />
 							</Map>
 						</div>
 						{#if center}
