@@ -30,7 +30,7 @@
 	  marker = new mapbox.Marker({
 	    color
 	  })
-	    .setLngLat([ lng || lon, lat ])
+	    .setLngLat([ lon, lat ])
 	    .setPopup(popup)
 	    .addTo(map)
 
