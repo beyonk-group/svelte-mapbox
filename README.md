@@ -52,7 +52,7 @@ The container component is the map, and there are a variety of components which 
 
   // Define this to handle `eventname` events - see [GeoLocate Events](https://docs.mapbox.com/mapbox-gl-js/api/markers/#geolocatecontrol-events)
   function eventHandler (e) {
-    const data = e.detail.data
+    const data = e.detail
     // do something with `data`, it's the result returned from the mapbox event
   }
 </script>
