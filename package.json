@@ -3,7 +3,7 @@
   "svelte": "src/components.js",
   "module": "index.mjs",
   "main": "index.mjs",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "scripts": {
     "build": "rollup -c",
     "dev": "NODE_ENV=development rollup -cw",
