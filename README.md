@@ -37,14 +37,14 @@ The container component is the map, and there are a variety of components which 
   <Marker lat={someLat} lng={someLng} color="rgb(255,255,255)" label="some marker label" popupClassName="class-name" /> // built in Marker component
   <NavigationControl />
   <GeolocateControl options={{ some: 'control-option' }} on:eventname={eventHandler} />
-  <ScalingControl />
+  <ScaleControl />
 </Map>
 
 <script>
   import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox'
 	import Earthquakes from './Earthquakes.svelte' // custom component
   
-  const { GeolocateControl, NavigationControl, ScalingControl } = controls
+  const { GeolocateControl, NavigationControl, ScaleControl } = controls
 
   // Usage of methods like setCenter and flyto
   mapComponent.setCenter([lng,lat],zoom) // zoom is optional
