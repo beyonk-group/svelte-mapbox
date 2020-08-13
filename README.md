@@ -51,8 +51,9 @@ The container component is the map, and there are a variety of components which 
   mapComponent.flyTo({center:[lng,lat]}) // documentation (https://docs.mapbox.com/mapbox-gl-js/example/flyto)
 
   // Define this to handle `eventname` events - see [GeoLocate Events](https://docs.mapbox.com/mapbox-gl-js/api/markers/#geolocatecontrol-events)
-  function eventHandler () {
-    // do stuff.
+  function eventHandler (e) {
+    const data = e.detail.data
+    // do something with `data`, it's the result returned from the mapbox event
   }
 </script>
 ```
