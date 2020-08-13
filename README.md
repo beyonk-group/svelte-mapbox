@@ -4,7 +4,7 @@
 
 ## Svelte MapBox
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) [![CircleCI](https://circleci.com/gh/beyonk-adventures/svelte-mapbox.svg?style=shield)](https://circleci.com/gh/beyonk-adventures/svelte-mapbox)  [![svelte-v2](https://img.shields.io/badge/svelte-v2-orange.svg)](https://v2.svelte.dev) [![svelte-v3](https://img.shields.io/badge/svelte-v3-blueviolet.svg)](https://svelte.dev)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) [![CircleCI](https://circleci.com/gh/beyonk-adventures/svelte-mapbox.svg?style=shield)](https://circleci.com/gh/beyonk-adventures/svelte-mapbox) [![svelte-v2](https://img.shields.io/badge/svelte-v2-orange.svg)](https://v2.svelte.dev) [![svelte-v3](https://img.shields.io/badge/svelte-v3-blueviolet.svg)](https://svelte.dev) ![publish](https://github.com/beyonk-adventures/svelte-mapbox/workflows/publish/badge.svg)
 
 Maps and Geocoding (Autocomplete) components in Vanilla JS (or Svelte)
 
@@ -36,7 +36,7 @@ The container component is the map, and there are a variety of components which 
   <Earthquakes /> // Any custom component you create or want here - see marker example
   <Marker lat={someLat} lng={someLng} color="rgb(255,255,255)" label="some marker label" popupClassName="class-name" /> // built in Marker component
   <NavigationControl />
-  <GeolocateControl options={{ some: 'control-option' }} />
+  <GeolocateControl options={{ some: 'control-option' }} on:eventname={eventHandler} />
   <ScalingControl />
 </Map>
 
@@ -49,6 +49,11 @@ The container component is the map, and there are a variety of components which 
   // Usage of methods like setCenter and flyto
   mapComponent.setCenter([lng,lat],zoom) // zoom is optional
   mapComponent.flyTo({center:[lng,lat]}) // documentation (https://docs.mapbox.com/mapbox-gl-js/example/flyto)
+
+  // Define this to handle `eventname` events - see [GeoLocate Events](https://docs.mapbox.com/mapbox-gl-js/api/markers/#geolocatecontrol-events)
+  function eventHandler () {
+    // do stuff.
+  }
 </script>
 ```
 ## Basic Usage (Geocoder)
