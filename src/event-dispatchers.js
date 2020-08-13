@@ -1,6 +1,6 @@
 function createDispatchers (target, dispatch, events) {
   const dispatchers = events.map(name => {
-    const dispatcher = data => dispatch(name, { data })
+    const dispatcher = data => dispatch(name, data)
     target.on(name, dispatcher)
     return { name, dispatcher }
   })

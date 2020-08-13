@@ -1,5 +1,5 @@
 <script>
-	import { getContext, onMount, createEventDispatcher } from 'svelte'
+	import { getContext, onDestroy, createEventDispatcher } from 'svelte'
 	import { contextKey } from '../mapbox.js'
 	import { createDispatchers } from '../event-dispatchers'
 
@@ -22,7 +22,8 @@
 	const geolocate = new mapbox.GeolocateControl(options)
 	map.addControl(geolocate, position)
 
-	onMount(createDispatchers(geolocate, dispatch, events))
+	const destroyDispatchers = createDispatchers(geolocate, dispatch, events)
+	onDestroy(destroyDispatchers)
 
 	export function trigger () {
 	  geolocate.trigger()
