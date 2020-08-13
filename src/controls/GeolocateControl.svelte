@@ -12,11 +12,11 @@
 	export let options = {}
 
 	const events = [
-		'error',
-		'geolocate',
-		'outofmaxbounds',
-		'trackuserlocationend',
-		'trackuserlocationstart'
+	  'error',
+	  'geolocate',
+	  'outofmaxbounds',
+	  'trackuserlocationend',
+	  'trackuserlocationstart'
 	]
 
 	const geolocate = new mapbox.GeolocateControl(options)
@@ -25,6 +25,6 @@
 	onMount(createDispatchers(geolocate, dispatch, events))
 
 	export function trigger () {
-		geolocate.trigger()
+	  geolocate.trigger()
 	}
 </script>
