@@ -17,7 +17,7 @@ Maps and Geocoding (Autocomplete) components in Vanilla JS (or Svelte)
 
 ## Installing
 
-**It is PARAMOUNT that you install this as a development dependency, not a runtime dependency. It won't work otherwise. Svelte bundles everything, so you should need any runtime dependencies at all**
+**It is PARAMOUNT that you install this as a development dependency, not a runtime dependency. It won't work otherwise. Svelte bundles everything, so you should not need any runtime dependencies at all**
 
 ```
 npm install --save-dev @beyonk/svelte-mapbox
