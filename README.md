@@ -56,6 +56,13 @@ The container component is the map, and there are a variety of components which 
     // do something with `data`, it's the result returned from the mapbox event
   }
 </script>
+
+<style>
+    .mapboxgl-map {
+        height: 200px;
+	// sometimes mapbox objects don't render as expected; troubleshoot by changing the height/width to px
+    }
+</style>
 ```
 ## Basic Usage (Geocoder)
 
