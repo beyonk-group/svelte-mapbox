@@ -61,7 +61,7 @@ The container component is the map, and there are a variety of components which 
 <style>
     :global(.mapboxgl-map) {
         height: 200px;
-	// sometimes mapbox objects don't render as expected; troubleshoot by changing the height/width to px
+        // sometimes mapbox objects don't render as expected; troubleshoot by changing the height/width to px
     }
 </style>
 ```
