@@ -32,6 +32,7 @@ The container component is the map, and there are a variety of components which 
   accessToken="<your api key>" // add your api key here
   bind:this={mapComponent} // Get reference to your map component to use methods
   on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) } // recentre events
+  options={{ scrollZoom: false }} // // add arbitrary options to the map from the mapbox api
 >
   <Earthquakes /> // Any custom component you create or want here - see marker example
   <Marker lat={someLat} lng={someLng} color="rgb(255,255,255)" label="some marker label" popupClassName="class-name" /> // built in Marker component
