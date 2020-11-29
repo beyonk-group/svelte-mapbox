@@ -13,6 +13,7 @@
   export let version = 'v4.5.1'
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
+  export let localGeocoder = null
   export let value = null
 
   export let geocoder = null
@@ -49,7 +50,8 @@
     const optionsWithDefaults = Object.assign({
       accessToken,
       types: types.join(','),
-      placeholder
+      placeholder,
+      localGeocoder
     }, options)
     geocoder = new window.MapboxGeocoder(optionsWithDefaults)
     geocoder.addTo(`#${fieldId}`)
