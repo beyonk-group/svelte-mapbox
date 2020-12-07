@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte'
+	import { onMount,afterUpdate } from 'svelte'
 	import { getContext } from 'svelte'
 	import { contextKey } from './mapbox.js'
 
@@ -35,6 +35,11 @@
 
 	  return () => marker.remove()
 	})
+	
+	afterUpdate(() => {
+	    // Update marker on map if the lat or lng has been changed
+	    marker.setLngLat([lng, lat]);
+	});
 
 	export function getMarker () {
 	  return marker
