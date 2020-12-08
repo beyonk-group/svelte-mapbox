@@ -11,27 +11,39 @@
 	  return Math.round(Math.random() * 255)
 	}
 
+  function move (lng, lat) {
+    marker.setLngLat({ lng, lat })
+  }
+
 	export let lat
 	export let lng
 	export let label = 'Marker'
 	export let popupClassName = 'beyonk-mapbox-popup'
-	export let color = randomColour()
+  export let color = randomColour()
+  export let popup = true
 
-	let marker = null
+	let marker
+
+  $: marker && move(lng, lat)
 
 	onMount(() => {
-	  const popup = new mapbox.Popup({
-	    offset: 25,
-	    className: popupClassName
-	  })
-	    .setText(label)
-
 	  marker = new mapbox.Marker({
 	    color
-	  })
-	    .setLngLat([ lng, lat ])
-	    .setPopup(popup)
-	    .addTo(map)
+    })
+    
+    if (popup) {
+      const p = new mapbox.Popup({
+        offset: 25,
+        className: popupClassName
+      })
+      .setText(label)
+
+      marker.setPopup(popup)
+    }
+
+    marker
+      .setLngLat({ lng, lat })
+      .addTo(map)
 
 	  return () => marker.remove()
 	})
