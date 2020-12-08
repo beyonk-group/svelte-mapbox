@@ -1,42 +1,40 @@
 <script>
-	import { onMount } from 'svelte'
-	import { getContext } from 'svelte'
-	import { contextKey } from './mapbox.js'
+  import { onMount } from 'svelte'
+  import { getContext } from 'svelte'
+  import { contextKey } from './mapbox.js'
 
-	const { getMap, getMapbox } = getContext(contextKey)
-	const map = getMap()
-	const mapbox = getMapbox()
-	
-	function randomColour () {
-	  return Math.round(Math.random() * 255)
-	}
+  const { getMap, getMapbox } = getContext(contextKey)
+  const map = getMap()
+  const mapbox = getMapbox()
+
+  function randomColour () {
+    return Math.round(Math.random() * 255)
+  }
 
   function move (lng, lat) {
     marker.setLngLat({ lng, lat })
   }
 
-	export let lat
-	export let lng
-	export let label = 'Marker'
-	export let popupClassName = 'beyonk-mapbox-popup'
+  export let lat
+  export let lng
+  export let label = 'Marker'
+  export let popupClassName = 'beyonk-mapbox-popup'
   export let color = randomColour()
   export let popup = true
 
-	let marker
+  let marker
 
   $: marker && move(lng, lat)
 
-	onMount(() => {
-	  marker = new mapbox.Marker({
-	    color
-    })
-    
+  onMount(() => {
+    marker = new mapbox.Marker({ color })
+
     if (popup) {
-      const p = new mapbox.Popup({
+      new mapbox.Popup({
         offset: 25,
         className: popupClassName
       })
-      .setText(label)
+        .setText(label)
 
       marker.setPopup(popup)
     }
@@ -45,10 +43,10 @@
       .setLngLat({ lng, lat })
       .addTo(map)
 
-	  return () => marker.remove()
-	})
+    return () => marker.remove()
+  })
 
-	export function getMarker () {
-	  return marker
-	}
+  export function getMarker () {
+    return marker
+  }
 </script>
