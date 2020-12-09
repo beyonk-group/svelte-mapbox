@@ -29,18 +29,18 @@
 
   let container
   let mapbox
-  let queue
 
+  const queue = new EventQueue(worker)
+  
+  export let center = [ 0, 0 ]
+  export let zoom = 7
   export let options = {}
   export let accessToken
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
-  export function setCenter (center, zoom) {
-    queue.send('setCenter', [ center ])
-    if (zoom && Number.isInteger(zoom)) {
-      queue.send('setZoom', [ zoom ])
-    }
-  }
+  $: queue.send('setCenter', [ center ])
+  $: queue.send('setZoom', [ zoom ])
+
   export function fitBounds (bbox) {
     queue.send('fitBounds', [ bbox ])
   }
@@ -66,12 +66,23 @@
     mapbox = window.mapboxgl
     const optionsWithDefaults = Object.assign({
       container,
-      style
+      style,
+      center,
+      zoom
     }, options)
 
     const el = new mapbox.Map(optionsWithDefaults)
 
-    el.on('dragend', () => dispatch('recentre', { center: el.getCenter() }))
+    el.on('dragend', () => {
+      const { lng, lat } = el.getCenter()
+      center = [ lng, lat ]
+      dispatch('recentre', { center })
+    })
+
+    el.on('zoom', () => {
+      zoom = el.getZoom()
+      dispatch('zoom', { zoom })
+    })
 
     el.on('load', () => {
       map = el
@@ -80,15 +91,13 @@
     })
   }
 
-function worker (cmd, cb) {
+  function worker (cmd, cb) {
     const [ command, params ] = cmd
     map[command].apply(map, params)
     cb(null)
   }
 
   onMount(async () => {
-    queue = new EventQueue(worker)
-
     loader([
       { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.js` },
       { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css` }

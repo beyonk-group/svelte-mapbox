@@ -65,6 +65,37 @@ The container component is the map, and there are a variety of components which 
     }
 </style>
 ```
+
+## Markers
+
+By default, markers have a popup. To turn this off, set `popup={false}` on the `Marker`:
+
+```jsx
+<Marker popup={false} />
+```
+
+## Reactive Properties
+
+The map has reactive properties for `center` and `zoom`. This means that if you set these properties, or modify them whilst the map is displayed, the map will react accordingly.
+
+This also means that if you bind these properties to a variable, that variable will automatically be updated with the current `center` and `zoom` of the map if the user moves or zooms the map.
+
+This is often easier than waiting for events such as `recentre` or `zoom` to be fired, to update markers and similar:
+
+```jsx
+<Map accessToken="<your api key>" bind:center bind:zoom>
+  <Marker bind:lat bind:lng />
+</Map>
+
+<script>
+  let center
+  let zoom
+
+  $: lng = center[0]
+  $: lat = center[1]
+</script>
+```
+
 ## Basic Usage (Geocoder)
 
 The Geocoder is an autocompleting place lookup, which returns a lat and lng for a place.
