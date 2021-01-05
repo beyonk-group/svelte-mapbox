@@ -30,7 +30,7 @@
   const queue = new EventQueue(worker)
 
   export let map = null
-  export let version = 'v1.11.0'  
+  export let version = 'v1.11.0'
   export let center = [ 0, 0 ]
   export let zoom = 7
   export let options = {}
