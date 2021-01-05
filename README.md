@@ -114,6 +114,10 @@ The most important event is `on:result` which is fired when a user selects an au
 
 There is a sixth event specific to this library, which is `on:ready`, which is fired when the component is ready for use. You can likely ignore it.
 
+## Custom CSS
+
+You can provide a custom CSS url (based on the one provided by mapbox) by passing the `cssUrl` property to either the `Map` or `Geocoder` components.
+
 ## Demo
 
 To see the earthquakes demo:

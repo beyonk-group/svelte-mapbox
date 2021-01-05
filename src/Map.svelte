@@ -24,18 +24,18 @@
 
   const dispatch = createEventDispatcher()
 
-  export let map = null
-  export let version = 'v1.11.0'
-
   let container
   let mapbox
 
   const queue = new EventQueue(worker)
-  
+
+  export let map = null
+  export let version = 'v1.11.0'  
   export let center = [ 0, 0 ]
   export let zoom = 7
   export let options = {}
   export let accessToken
+  export let cssUrl = `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css`
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
   $: queue.send('setCenter', [ center ])
@@ -100,7 +100,7 @@
   onMount(async () => {
     loader([
       { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.js` },
-      { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css` }
+      { type: 'style', url: cssUrl }
     ],
     () => !!window.mapboxgl,
     onAvailable
