@@ -35,7 +35,7 @@
   export let zoom = 7
   export let options = {}
   export let accessToken
-  export let cssUrl = `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css`
+  export let customStylesheetUrl
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
   $: queue.send('setCenter', [ center ])
@@ -97,13 +97,26 @@
     cb(null)
   }
 
-  onMount(async () => {
-    loader([
+  onMount(() => {
+    const resources = [
       { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.js` },
-      { type: 'style', url: cssUrl }
-    ],
-    () => !!window.mapboxgl,
-    onAvailable
+      { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/${version}/mapbox-gl.css` }
+    ]
+
+    if (customStylesheetUrl) {
+      resources.push({ type: 'style', url: customStylesheetUrl })
+    }
+
+    loader(
+      resources,
+      () => !!window.MapboxGeocoder,
+      onAvailable
+    )
+
+    loader(
+      resources,
+      () => !!window.mapboxgl,
+      onAvailable
     )
 
     return () => {

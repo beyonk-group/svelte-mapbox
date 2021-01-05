@@ -116,7 +116,7 @@ There is a sixth event specific to this library, which is `on:ready`, which is f
 
 ## Custom CSS
 
-You can provide a custom CSS url (based on the one provided by mapbox) by passing the `cssUrl` property to either the `Map` or `Geocoder` components.
+You can add additional css to override mapbox provided CSS by passing the `customStylesheetUrl` property to either the `Map` or `Geocoder` components.
 
 ## Demo
 

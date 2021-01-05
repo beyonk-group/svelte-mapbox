@@ -14,7 +14,7 @@
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
   export let value = null
-  export let cssUrl = `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css`
+  export let customStylesheetUrl
 
   export let geocoder = null
 
@@ -28,12 +28,19 @@
   const onClear = p => dispatch('clear', p)
 
   onMount(() => {
-    loader([
+    const resources = [
       { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.min.js` },
-      { type: 'style', url: cssUrl }
-    ],
-    () => !!window.MapboxGeocoder,
-    onAvailable
+      { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css` }
+    ]
+
+    if (customStylesheetUrl) {
+      resources.push({ type: 'style', url: customStylesheetUrl })
+    }
+
+    loader(
+      resources,
+      () => !!window.MapboxGeocoder,
+      onAvailable
     )
 
     return () => {
