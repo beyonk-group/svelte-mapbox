@@ -78,6 +78,8 @@
       center = [ lng, lat ]
       dispatch('recentre', { center })
     })
+    
+    el.on("click", e => dispatch('click', { lng: e.lngLat.lng, lat: e.lngLat.lat }))
 
     el.on('zoom', () => {
       zoom = el.getZoom()
