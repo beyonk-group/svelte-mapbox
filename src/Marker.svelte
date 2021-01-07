@@ -18,6 +18,7 @@
   export let lat
   export let lng
   export let label = 'Marker'
+  export let html = ''
   export let popupClassName = 'beyonk-mapbox-popup'
   export let markerOffset = [ 0, 0 ]
   export let popupOffset = 10
@@ -35,7 +36,12 @@
       const popupEl = new mapbox.Popup({
         offset: popupOffset,
         className: popupClassName
-      }).setText(label)
+      })
+      if (html !== '') {
+        popupEl.setHTML(html)
+      } else {
+        popupEl.setText(label)
+      }
 
       marker.setPopup(popupEl)
     }
