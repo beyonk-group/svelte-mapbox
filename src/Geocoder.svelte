@@ -14,7 +14,7 @@
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
   export let value = null
-  export let customStylesheetUrl
+  export let customStylesheetUrl = false
 
   export let geocoder = null
 

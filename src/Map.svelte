@@ -35,7 +35,7 @@
   export let zoom = 7
   export let options = {}
   export let accessToken
-  export let customStylesheetUrl
+  export let customStylesheetUrl = false
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
   $: queue.send('setCenter', [ center ])
@@ -79,7 +79,7 @@
       dispatch('recentre', { center })
     })
     
-    el.on("click", e => dispatch('click', { lng: e.lngLat.lng, lat: e.lngLat.lat }))
+    el.on('click', e => dispatch('click', { lng: e.lngLat.lng, lat: e.lngLat.lat }))
 
     el.on('zoom', () => {
       zoom = el.getZoom()
@@ -108,12 +108,6 @@
     if (customStylesheetUrl) {
       resources.push({ type: 'style', url: customStylesheetUrl })
     }
-
-    loader(
-      resources,
-      () => !!window.MapboxGeocoder,
-      onAvailable
-    )
 
     loader(
       resources,
