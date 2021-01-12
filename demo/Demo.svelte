@@ -74,7 +74,7 @@
 							<Map
 								bind:this={mapComponent}
 								accessToken="%API_KEY%"
-								on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) }
+								on:recentre={e => console.log(e.detail) }
 								{center}
 								{zoom}
 							>
