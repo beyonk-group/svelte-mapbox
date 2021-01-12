@@ -75,7 +75,8 @@
 								bind:this={mapComponent}
 								accessToken="%API_KEY%"
 								on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) }
-								options={{ center }}
+								{center}
+								{zoom}
 							>
 								<Earthquakes />
                 <NavigationControl />
@@ -158,7 +159,8 @@
 
 	let page = 'about'
 	let place = null
-	let center = { lng: randomLng(), lat: randomLat() }
+	let center = { lat: 53.3358627, lng: -2.8572362 }
+	let zoom = 11.15
 	let mapComponent
 
 	function navigate (next) {

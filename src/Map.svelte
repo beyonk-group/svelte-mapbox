@@ -30,16 +30,15 @@
   const queue = new EventQueue(worker)
 
   export let map = null
-  export let version = 'v1.11.0'
+  export let version = 'v1.11.1'
   export let center = [ 0, 0 ]
-  export let zoom = 7
+  export let zoom = 9
+  export let zoomRate = 1
+  export let wheelZoomRate = 1
   export let options = {}
   export let accessToken
   export let customStylesheetUrl = false
   export let style = 'mapbox://styles/mapbox/streets-v11'
-
-  $: queue.send('setCenter', [ center ])
-  $: queue.send('setZoom', [ zoom ])
 
   export function fitBounds (bbox) {
     queue.send('fitBounds', [ bbox ])
@@ -51,6 +50,10 @@
 
   export function resize () {
     queue.send('resize')
+  }
+
+  export function setCenter (coords) {
+    queue.send('setCenter', [ coords ])
   }
 
   export function getMap () {
@@ -68,7 +71,9 @@
       container,
       style,
       center,
-      zoom
+      zoom,
+      zoomRate,
+      wheelZoomRate
     }, options)
 
     const el = new mapbox.Map(optionsWithDefaults)

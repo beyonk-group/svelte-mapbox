@@ -7,6 +7,7 @@ export class EventQueue {
   }
 
   send (command, params = []) {
+    if (!command) { return }
     this.queue.push([ command, params ])
   }
 
