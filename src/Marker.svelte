@@ -19,6 +19,8 @@
   export let lng
   export let label = 'Marker'
   export let popupClassName = 'beyonk-mapbox-popup'
+  export let markerOffset = [ 0, 0 ]
+  export let popupOffset = 10
   export let color = randomColour()
   export let popup = true
 
@@ -27,16 +29,15 @@
   $: marker && move(lng, lat)
 
   onMount(() => {
-    marker = new mapbox.Marker({ color })
+    marker = new mapbox.Marker({ color, offset: markerOffset })
 
     if (popup) {
-      new mapbox.Popup({
-        offset: 25,
+      const popupEl = new mapbox.Popup({
+        offset: popupOffset,
         className: popupClassName
-      })
-        .setText(label)
+      }).setText(label)
 
-      marker.setPopup(popup)
+      marker.setPopup(popupEl)
     }
 
     marker
