@@ -122,7 +122,9 @@
 
     return () => {
       queue.stop()
-      map.remove()
+      if (map && map.remove) {
+        map.remove()
+      }
     }
   })
 </script>
