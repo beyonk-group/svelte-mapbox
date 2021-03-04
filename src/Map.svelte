@@ -56,6 +56,10 @@
     queue.send('setCenter', [ coords ])
   }
 
+  export function addControl (control) {
+    queue.send('addControl', [ control ])
+  }
+
   export function getMap () {
     return map
   }
