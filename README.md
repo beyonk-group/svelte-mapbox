@@ -23,7 +23,7 @@ Maps and Geocoding (Autocomplete) components in Vanilla JS (or Svelte)
 npm install --save-dev @beyonk/svelte-mapbox
 ```
 
-## Basic Usage (Map)
+### Basic Usage (Map)
 
 The container component is the map, and there are a variety of components which go on the map.
 
@@ -66,7 +66,7 @@ The container component is the map, and there are a variety of components which 
 </style>
 ```
 
-## Markers
+### Markers
 
 By default, markers have a popup. To turn this off, set `popup={false}` on the `Marker`:
 
@@ -74,7 +74,7 @@ By default, markers have a popup. To turn this off, set `popup={false}` on the `
 <Marker popup={false} />
 ```
 
-## Reactive Properties
+### Reactive Properties
 
 The map has reactive properties for `center` and `zoom`. This means that if you set these properties, or modify them whilst the map is displayed, the map will react accordingly.
 
@@ -95,6 +95,14 @@ This is often easier than waiting for events such as `recentre` or `zoom` to be 
   $: lat = center[1]
 </script>
 ```
+
+### Methods
+
+The map has a variety of methods which delegate to a queue. The reason for this is that MapBox is quite a heavy library, and rendering a map is a pretty heavy operation. It's hard to guarantee
+when everything is ready in your browser, and when you can start doing things with it.
+
+In case you want raw map access to interact directly with the map, you can call `getMap` on the map and interact with it that way. However we don't recommend it, as you have no guarantees that the
+map is ready in your browser when you call it this way.
 
 ## Basic Usage (Geocoder)
 
