@@ -25,13 +25,12 @@
   export let popup = true
 
   let marker
-  let elementMarker
-  let elementPopup
+  let element
 
   $: marker && move(lng, lat)
 
   onMount(() => {
-    if(elementMarker.hasChildNodes()) {
+    if(element.hasChildNodes()) {
       marker = new mapbox.Marker({ element, offset: markerOffset })
     } else {
       marker = new mapbox.Marker({ color, offset: markerOffset })
@@ -41,12 +40,7 @@
       const popupEl = new mapbox.Popup({
         offset: popupOffset,
         className: popupClassName
-      })
-      if (elementPopup.hasChildNodes()) {
-        popupEl.setHTML(elementPopup)
-      } else {
-        popupEl.setText(label)
-      }
+      }).setText(label)
 
       marker.setPopup(popupEl)
     }
@@ -63,10 +57,6 @@
   }
 </script>
 
-<div bind:this={elementMarker}>
-  <slot></slot>
-</div>
-
-<div bind:this={elementPopup}>
-  <slot name="popup"></slot>
+<div bind:this={element}>
+<slot ></slot>
 </div>
