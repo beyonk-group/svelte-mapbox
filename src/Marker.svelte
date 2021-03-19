@@ -64,9 +64,9 @@
 </script>
 
 <div bind:this={elementMarker}>
-<slot ></slot>
+  <slot></slot>
 </div>
 
 <div bind:this={elementPopup}>
-<span slot="popuop"></span>
+  <slot name="popup"></slot>
 </div>
