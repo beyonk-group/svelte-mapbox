@@ -26,7 +26,7 @@
 
   let container
   let mapbox
-  let animationInProgress = false;
+  let animationInProgress = false
   const queue = new EventQueue(worker)
 
   export let map = null
@@ -68,8 +68,8 @@
     return mapbox
   }
 
-  function setZoom(zoom) {
-    queue.send('setZoom', [zoom]);
+  function setZoom (zoom) {
+    queue.send('setZoom', [ zoom ])
   }
 
   function onAvailable () {
@@ -95,21 +95,21 @@
     el.on('click', e => dispatch('click', { lng: e.lngLat.lng, lat: e.lngLat.lat }))
 
     el.on('zoomstart', () => {
-      animationInProgress = true;
-      zoom = el.getZoom();
-      dispatch('zoomstart', { zoom });
-    });
+      animationInProgress = true
+      zoom = el.getZoom()
+      dispatch('zoomstart', { zoom })
+    })
 
     el.on('zoom', () => {
-      zoom = el.getZoom();
-      dispatch('zoom', { zoom });
-    });
+      zoom = el.getZoom()
+      dispatch('zoom', { zoom })
+    })
 
     el.on('zoomend', () => {
-      animationInProgress = false;
-      zoom = el.getZoom();
-      dispatch('zoomend', { zoom });
-    });
+      animationInProgress = false
+      zoom = el.getZoom()
+      dispatch('zoomend', { zoom })
+    })
 
     el.on('load', () => {
       map = el
@@ -148,5 +148,5 @@
     }
   })
 
-  $: !animationInProgress && setZoom(zoom);
+  $: !animationInProgress && setZoom(zoom)
 </script>
