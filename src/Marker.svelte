@@ -63,7 +63,7 @@
   }
 </script>
 
-<div bind:this={element} class='mapMarker'>
+<div bind:this={element}>
 <slot ></slot>
 </div>
 
