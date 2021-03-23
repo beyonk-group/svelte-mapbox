@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { getContext } from 'svelte'
   import { contextKey } from './mapbox.js'
+  import { afterUpdate, beforeUpdate } from 'svelte';
 
   const { getMap, getMapbox } = getContext(contextKey)
   const map = getMap()
@@ -23,9 +24,10 @@
   export let popupOffset = 10
   export let color = randomColour()
   export let popup = true
-
+  
   let marker
   let element
+  let elementPopup
 
   $: marker && move(lng, lat)
 
@@ -35,12 +37,17 @@
     } else {
       marker = new mapbox.Marker({ color, offset: markerOffset })
     }
-
+    
     if (popup) {
       const popupEl = new mapbox.Popup({
         offset: popupOffset,
         className: popupClassName
-      }).setText(label)
+      });
+      if (elementPopup.hasChildNodes()) {
+        popupEl.setHTML(elementPopup.innerHTML)
+      } else {
+        popupEl.setText(label);
+      }
 
       marker.setPopup(popupEl)
     }
@@ -57,6 +64,22 @@
   }
 </script>
 
-<div bind:this={element}>
+<div bind:this={element} class='mapMarker'>
 <slot ></slot>
 </div>
+
+<div class='popup' bind:this={elementPopup}>
+  <slot name="popup"></slot>
+</div>
+
+<style>
+  .mapMarker {
+    z-index: 1;
+  }
+  .mapMarker:hover {
+    z-index: 2;
+  }
+  .popup {
+    display:none;
+  }
+</style>
