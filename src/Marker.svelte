@@ -2,7 +2,6 @@
   import { onMount } from 'svelte'
   import { getContext } from 'svelte'
   import { contextKey } from './mapbox.js'
-  import { afterUpdate, beforeUpdate } from 'svelte';
 
   const { getMap, getMapbox } = getContext(contextKey)
   const map = getMap()
@@ -73,12 +72,6 @@
 </div>
 
 <style>
-  .mapMarker {
-    z-index: 1;
-  }
-  .mapMarker:hover {
-    z-index: 2;
-  }
   .popup {
     display:none;
   }
