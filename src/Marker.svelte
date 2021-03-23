@@ -23,7 +23,7 @@
   export let popupOffset = 10
   export let color = randomColour()
   export let popup = true
-
+  export let customPopupHtml = ""
   let marker
 
   $: marker && move(lng, lat)
@@ -32,11 +32,17 @@
     marker = new mapbox.Marker({ color, offset: markerOffset })
 
     if (popup) {
-      const popupEl = new mapbox.Popup({
+      let popupEl = new mapbox.Popup({
         offset: popupOffset,
         className: popupClassName
-      }).setText(label)
-
+      })
+      
+      if(customPopupHtml === ""){
+        popupEl.setText(label)
+      }
+      else{
+        popupEl.setHTML(customPopupHtml)
+      }
       marker.setPopup(popupEl)
     }
 
