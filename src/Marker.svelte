@@ -43,7 +43,7 @@
         className: popupClassName
       });
       if (elementPopup.hasChildNodes()) {
-        popupEl.setHTML(elementPopup.innerHTML)
+        popupEl.setDOMContent(elementPopup)
       } else {
         popupEl.setText(label);
       }
@@ -70,9 +70,3 @@
 <div class='popup' bind:this={elementPopup}>
   <slot name="popup"></slot>
 </div>
-
-<style>
-  .popup {
-    display:none;
-  }
-</style>
