@@ -30,7 +30,7 @@
   $: marker && move(lng, lat)
 
   onMount(() => {
-    if(element.hasChildNodes()) {
+    if (element.hasChildNodes()) {
       marker = new mapbox.Marker({ element, offset: markerOffset })
     } else {
       marker = new mapbox.Marker({ color, offset: markerOffset })
