@@ -36,16 +36,16 @@
     } else {
       marker = new mapbox.Marker({ color, offset: markerOffset })
     }
-    
+  
     if (popup) {
       const popupEl = new mapbox.Popup({
         offset: popupOffset,
         className: popupClassName
-      });
+      })
       if (elementPopup.hasChildNodes()) {
         popupEl.setDOMContent(elementPopup)
       } else {
-        popupEl.setText(label);
+        popupEl.setText(label)
       }
 
       marker.setPopup(popupEl)
