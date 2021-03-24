@@ -55,7 +55,18 @@
 					</div>
 				</aside>
 				<div class="content-info">
-		  			<button id="fly-to" on:click={flyToRandomPlace}>Fly to random location</button>
+					<div class="action-buttons">
+						<button id="fly-to" on:click={flyToRandomPlace}
+						  >Fly to random location</button
+						>
+			
+						<button
+						  id="change-zoom"
+						  on:click={() => (zoom = Math.floor(Math.random() * 10))}
+						  >Change Zoom Level</button
+						>
+					  </div>
+
 					<div class="section-txt" id="geocoder">
 						<form on:submit|preventDefault={() => console.log('form submitted') }>
 						<Geocoder accessToken="%API_KEY%" on:result={placeChanged} />
@@ -76,7 +87,7 @@
 								accessToken="%API_KEY%"
 								on:recentre={e => console.log(e.detail) }
 								{center}
-								{zoom}
+								bind:zoom
 							>
 								<Earthquakes />
                 <NavigationControl />
@@ -128,11 +139,16 @@
 		height: 300px;
 	}
 
-	#fly-to{
+	.action-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+	#fly-to,
+	#change-zoom {
 		display: block;
         position: relative;
         margin: 0px auto;
-        width: 50%;
         height: 40px;
         padding: 10px;
         border: none;
@@ -142,6 +158,8 @@
         color: #fff;
         background: #ee8a65;
 	}
+
+
 </style>
 
 <script>
