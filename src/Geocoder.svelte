@@ -44,7 +44,7 @@
     )
 
     return () => {
-      geocoder
+      geocoder && geocoder
         .off('results', onResults)
         .off('result', onResult)
         .off('loading', onLoading)
@@ -75,7 +75,7 @@
     dispatch('ready')
   }
 
-  $: ready && value && geocoder.setInput(value)
+  $: ready && value && geocoder && geocoder.setInput(value)
 </script>
 
 <style>
