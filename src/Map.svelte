@@ -40,24 +40,24 @@
   export let customStylesheetUrl = false
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
-  export function fitBounds (bbox) {
-    queue.send('fitBounds', [ bbox ])
-  }
+  export function fitBounds (bbox, options={}) {
+    queue.send('fitBounds', [ bbox, options ])
+}
 
-  export function flyTo (destination) {
-    queue.send('flyTo', [ destination ])
+  export function flyTo (destination, options={}) {
+    queue.send('flyTo', [ destination, options ])
   }
 
   export function resize () {
     queue.send('resize')
   }
 
-  export function setCenter (coords) {
-    queue.send('setCenter', [ coords ])
+  export function setCenter (coords, eventData={}) {
+    queue.send('setCenter', [ coords, eventData ])
   }
 
-  export function addControl (control) {
-    queue.send('addControl', [ control ])
+  export function addControl (control, position='top-right') {
+    queue.send('addControl', [ control, position ])
   }
 
   export function getMap () {
@@ -68,8 +68,8 @@
     return mapbox
   }
 
-  function setZoom (zoom) {
-    queue.send('setZoom', [ zoom ])
+  function setZoom (zoom, eventData={}) {
+    queue.send('setZoom', [ zoom, eventData ])
   }
 
   function onAvailable () {
