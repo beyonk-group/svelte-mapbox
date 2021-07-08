@@ -23,7 +23,9 @@
   export let popupOffset = 10
   export let color = randomColour()
   export let popup = true
-  
+  export let popupOptions = {}
+  export let markerOptions = {}
+
   let marker
   let element
   let elementPopup
@@ -31,17 +33,17 @@
   $: marker && move(lng, lat)
 
   onMount(() => {
+    let namedParams
     if (element.hasChildNodes()) {
-      marker = new mapbox.Marker({ element, offset: markerOffset })
+      namedParams = { element, offset: markerOffset }
     } else {
-      marker = new mapbox.Marker({ color, offset: markerOffset })
+      namedParams = { color, offset: markerOffset }
     }
-  
+    marker = new mapbox.Marker(Object.assign(namedParams, markerOptions))
+    
     if (popup) {
-      const popupEl = new mapbox.Popup({
-        offset: popupOffset,
-        className: popupClassName
-      })
+      let namedPopupParams = { offset: popupOffset,  className: popupClassName }
+      const popupEl = new mapbox.Popup(Object.assign(namedPopupParams, popupOptions))
       if (elementPopup.hasChildNodes()) {
         popupEl.setDOMContent(elementPopup)
       } else {
