@@ -6,7 +6,7 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) [![svelte-v3](https://img.shields.io/badge/svelte-v3-blueviolet.svg)](https://svelte.dev) ![publish](https://github.com/beyonk-adventures/svelte-mapbox/workflows/publish/badge.svg)
 
-Maps and Geocoding (Autocomplete) components in Vanilla JS (or Svelte)
+Maps and Geocoding (Autocomplete) [MapBox](https://www.mapbox.com/) components in Vanilla JS (or Svelte)
 
 * SSR Ready
 * Lightweight
@@ -68,10 +68,64 @@ The container component is the map, and there are a variety of components which 
 
 ### Markers
 
-By default, markers have a popup. To turn this off, set `popup={false}` on the `Marker`:
+By default, markers are typical map pins to which you can pass a color property.
+
+```jsx
+<Marker color={brandColour} />
+```
+
+You may also create a custom pin with the default slot.
+
+```jsx
+<Marker
+lat={waypoint.geo.lat}
+lng={waypoint.geo.lng}
+> 
+  <a href={waypoint.slug}>
+    <div class='myMarker {($mapData.activeMarker == waypoint.id) ? 'active' : ''}' 
+    style="
+    color:{mainPoint.color};
+    background-image: url('{(waypoint.images != undefined) ? waypoint.images[0].thumb.url : ''}');
+    ">
+    </div>
+  </a>
+</Marker>
+```
+
+### Marker Popups
+By default a popup is revealed when you click a pin.  It is populated with text provided in the label property.
+
+```jsx
+<Marker label={markerText} />
+```
+
+To indicate interactivity, you may target the marker with some custom CSS:
+
+```jsx
+<style>
+    :global(.mapboxgl-marker){
+      cursor: pointer;
+    }   
+</style>
+```
+
+Optionally, disable the popup with the `popup={false}` property:
 
 ```jsx
 <Marker popup={false} />
+```
+
+You may alternatively pass a custom DOM element to the marker to use as a popup. 
+
+```jsx
+<Marker lat={pin.coordinates.latitude} lng={pin.coordinates.longitude}>
+    <div class="content" slot="popup">
+      <h3>{pin.name}</h3>
+        <Markdown source={pin.description} />
+      </div>
+      <img src="{pin.images.length > 0 ? pin.images[0].url : ""}" alt="{pin.name}"/>
+    </div> 
+</Marker>
 ```
 
 ### Reactive Properties
