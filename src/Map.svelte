@@ -42,7 +42,7 @@
 
   export function fitBounds (bbox, options = {}) {
     queue.send('fitBounds', [ bbox, options ])
-}
+  }
 
   export function flyTo (destination, options = {}) {
     queue.send('flyTo', [ destination, options ])
