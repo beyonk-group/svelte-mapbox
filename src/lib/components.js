@@ -11,8 +11,7 @@ import ScaleControl from './controls/ScaleControl.svelte'
 const controls = {
   GeolocateControl,
   NavigationControl,
-  ScaleControl,
-  ScalingControl: ScaleControl
+  ScaleControl
 }
 
 export {

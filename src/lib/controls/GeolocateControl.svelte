@@ -1,7 +1,7 @@
 <script>
 	import { getContext, onDestroy, createEventDispatcher } from 'svelte'
 	import { contextKey } from '../mapbox.js'
-	import { createDispatchers } from '../event-dispatchers'
+	import { createDispatchers } from '../event-dispatchers.js'
 
 	const dispatch = createEventDispatcher()
 	const { getMap, getMapbox } = getContext(contextKey)

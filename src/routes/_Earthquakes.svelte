@@ -1,9 +1,9 @@
 <script>
-  import { getContext, onMount } from 'svelte'
-  import { contextKey } from '../src/components.js'
-  import MiniScroller from './MiniScroller.svelte'
+  import { getContext } from 'svelte'
+  import { contextKey } from '$lib/components.js'
+  import MiniScroller from './_MiniScroller.svelte'
 
-	const { getMap, getMapbox } = getContext(contextKey)
+  const { getMap, getMapbox } = getContext(contextKey)
   const map = getMap()
   const mapbox = getMapbox()
 

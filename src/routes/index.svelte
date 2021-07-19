@@ -1,6 +1,3 @@
-<svelte:head>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-</svelte:head>
 <header>
 	<div class="container">
 		<div class="row">
@@ -69,7 +66,7 @@
 
 					<div class="section-txt" id="geocoder">
 						<form on:submit|preventDefault={() => console.log('form submitted') }>
-						<Geocoder accessToken="%API_KEY%" on:result={placeChanged} />
+						<Geocoder accessToken={mapboxToken} on:result={placeChanged} />
             {#if place}
               <dl>
 								<dt>Name:</dt>
@@ -84,7 +81,7 @@
 						<div class="map-wrap">
 							<Map
 								bind:this={mapComponent}
-								accessToken="%API_KEY%"
+								accessToken={mapboxToken}
 								on:recentre={e => console.log(e.detail) }
 								{center}
 								bind:zoom
@@ -159,15 +156,12 @@
         background: #ee8a65;
 	}
 
-
 </style>
 
 <script>
-  import './normalize.css'
-  import './prettify.css'
-  import './style.css'
-  import { Map, Geocoder, Marker, controls } from '../src/components.js'
-	import Earthquakes from './Earthquakes.svelte'
+	import { mapboxToken } from '$lib/conf.js'
+  import { Map, Geocoder, Marker, controls } from '$lib/components.js'
+	import Earthquakes from './_Earthquakes.svelte'
   
   const { GeolocateControl, NavigationControl } = controls
 	
