@@ -1,4 +1,4 @@
-import { writable, get } from 'svelte/store'
+import { writable } from 'svelte/store'
 
 export class EventQueue {
   constructor () {
@@ -14,7 +14,6 @@ export class EventQueue {
 
   start (map) {
     this.unsubscribe = this.queue.subscribe(queue => {
-      console.log('q contents', queue)
       while (queue.length) {
         const [ command, params ] = queue.shift()
         map[command].apply(map, params)

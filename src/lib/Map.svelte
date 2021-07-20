@@ -81,6 +81,10 @@
     queue.send('setCenter', [ coords, data ])
   }
 
+  export function setZoom (value, data = {}) {
+    queue.send('setZoom', [ value, data ])
+  }
+
   export function addControl (control, position = 'top-right') {
     queue.send('addControl', [ control, position ])
   }
@@ -92,4 +96,6 @@
   export function getMapbox () {
     return mapbox
   }
+
+  $: zoom && setZoom(zoom)
 </script>

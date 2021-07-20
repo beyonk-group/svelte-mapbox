@@ -1,6 +1,13 @@
 <div
   use:action={optionsWithDefaults}
-  on:ready={init} />
+  on:ready={init}
+  on:results
+  on:result
+  on:loading
+  on:error
+  on:clear
+  on:load
+/>
 
 <script>
   import action from './geocoder-action.js'

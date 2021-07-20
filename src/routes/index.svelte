@@ -65,8 +65,8 @@
 					  </div>
 
 					<div class="section-txt" id="geocoder">
-						<form on:submit|preventDefault={() => console.log('form submitted') }>
-						<Geocoder accessToken={mapboxToken} on:result={placeChanged} />
+						<form>
+						<Geocoder accessToken={mapboxToken} on:result={placeChanged} on:clear={() => mapComponent.setCenter({ lng: 0, lat: 0 })} />
             {#if place}
               <dl>
 								<dt>Name:</dt>
@@ -82,7 +82,7 @@
 							<Map
 								bind:this={mapComponent}
 								accessToken={mapboxToken}
-								on:recentre={e => console.log(e.detail) }
+								on:recentre={recentre}
 								{center}
 								bind:zoom
 							>
@@ -95,6 +95,7 @@
 						{#if center}
 							<dt>Geolocation:</dt>
 							<dd>lat: {center.lat}, lng: {center.lng}</dd>
+							<dd>zoom: {zoom}</dd>
 						{/if}
           </div>
 				</div>
@@ -164,10 +165,6 @@
 	import Earthquakes from './_Earthquakes.svelte'
   
   const { GeolocateControl, NavigationControl } = controls
-	
-	if (typeof window !== 'undefined') {
-		window.global = {}
-	}
 
 	let page = 'about'
 	let place = null
@@ -200,5 +197,10 @@
       ],
       essential:true
     })
+	}
+
+	function recentre ({ detail }) {
+		console.log(detail.center)
+		center = detail.center
 	}
 </script>

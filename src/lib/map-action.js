@@ -35,7 +35,7 @@ function init (options, node) {
 }
 
 const handlers = {
-  dragend: el => {
+  moveend: el => {
     return [ 'recentre', { center: el.getCenter() } ]
   },
   click: (el, { lngLat }) => {

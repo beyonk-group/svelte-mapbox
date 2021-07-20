@@ -6,12 +6,12 @@ export default function action (node, options = {}) {
 
   const resources = [
     { type: 'script', value: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${options.version}/mapbox-gl-geocoder.min.js`, id: 'byk-gc-js' },
-    { type: 'style', value: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${options.version}/mapbox-gl-geocoder.css`, id: 'byk-gc-css' }
+    { type: 'link', value: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${options.version}/mapbox-gl-geocoder.css`, id: 'byk-gc-css' }
   ]
 
   const customStylesheetUrl = options.customStylesheetUrl
   if (customStylesheetUrl) {
-    resources.push({ type: 'style', value: customStylesheetUrl, id: 'byk-gcsu-css' })
+    resources.push({ type: 'link', value: customStylesheetUrl, id: 'byk-gcsu-css' })
   }
 
   let unbind = () => {}
@@ -30,7 +30,7 @@ export default function action (node, options = {}) {
 function init (options, node) {
   const geocoder = new window.MapboxGeocoder(options)
   geocoder.addTo(node)
-  geocoder.setInput(options.value)
+  // geocoder.setInput(options.value)
 
   return bindEvents(geocoder, handlers, node)
 }

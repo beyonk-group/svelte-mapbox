@@ -3,6 +3,7 @@ function load (assets, cb) {
     const existing = document.getElementById(id)
     if (existing) { return }
     const tag = document.createElement(type)
+    tag.id = id
     if (type === 'script') {
       tag.async = true
       tag.defer = true
