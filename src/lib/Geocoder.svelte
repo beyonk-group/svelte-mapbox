@@ -1,81 +1,31 @@
-<div bind:this={container} id={fieldId} />
+<div
+  use:action={optionsWithDefaults}
+  on:ready={init} />
 
 <script>
-  import { onMount, createEventDispatcher } from 'svelte'
-  import loader from '@beyonk/async-script-loader'
-
-  const dispatch = createEventDispatcher()
-
-  const fieldId = 'bsm-' + Math.random().toString(36).substring(6)
+  import action from './geocoder-action.js'
 
   export let accessToken
   export let options = {}
-  export let version = 'v4.5.1'
+  export let version = 'v4.7.2'
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
   export let value = null
   export let customStylesheetUrl = false
+  export let geocoder
 
-  export let geocoder = null
-
-  let container
-  let ready = false
-
-  const onResult = p => dispatch('result', p)
-  const onResults = p => dispatch('results', p)
-  const onError = p => dispatch('error', p)
-  const onLoading = p => dispatch('loading', p)
-  const onClear = p => dispatch('clear', p)
-
-  onMount(() => {
-    const resources = [
-      { type: 'script', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.min.js` },
-      { type: 'style', url: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${version}/mapbox-gl-geocoder.css` }
-    ]
-
-    if (customStylesheetUrl) {
-      resources.push({ type: 'style', url: customStylesheetUrl })
-    }
-
-    loader(
-      resources,
-      () => !!window.MapboxGeocoder,
-      onAvailable
-    )
-
-    return () => {
-      geocoder && geocoder
-        .off('results', onResults)
-        .off('result', onResult)
-        .off('loading', onLoading)
-        .off('error', onError)
-        .off('clear', onClear)
-    }
-  })
-
-  function onAvailable () {
-    const optionsWithDefaults = Object.assign({
+  const optionsWithDefaults = Object.assign({
+      version,
       accessToken,
       types: types.join(','),
-      placeholder
+      placeholder,
+      customStylesheetUrl,
+      value
     }, options)
-    geocoder = new window.MapboxGeocoder(optionsWithDefaults)
-    geocoder.addTo(`#${fieldId}`)
-  
-    geocoder
-      .on('results', onResults)
-      .on('result', onResult)
-      .on('loading', onLoading)
-      .on('error', onError)
-      .on('clear', onClear)
 
-    geocoder.setInput(value)
-
-    ready = true
-    dispatch('ready')
+  function init ({ detail }) {
+    geocoder = detail.geocoder
   }
-
-  $: ready && value && geocoder && geocoder.setInput(value)
 </script>
 
 <style>

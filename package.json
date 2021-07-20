@@ -11,9 +11,5 @@
     "@sveltejs/kit": "next",
     "svelte": "^3.34.0"
   },
-  "type": "module",
-  "dependencies": {
-    "@beyonk/async-script-loader": "^2.0.0",
-    "fastq": "^1.11.1"
-  }
+  "type": "module"
 }

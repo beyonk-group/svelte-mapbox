@@ -1,4 +1,12 @@
-<div use:action={opts} on:ready={init}>
+<div
+  use:action={optionsWithDefaults}
+  on:ready={init}
+  on:recentre
+  on:click
+  on:zoomstart
+  on:zoom
+  on:zoomend
+  >
   {#if map}
   <slot></slot>
   {/if}
@@ -14,7 +22,7 @@
 <script>
   import { setContext, onDestroy } from 'svelte'
   import { contextKey } from './mapbox.js'
-  import action from './mapbox-action.js'
+  import action from './map-action.js'
   import { EventQueue } from './queue.js'
 
   setContext(contextKey, {
@@ -24,10 +32,9 @@
 
   let container
   let mapbox
-  // let animationInProgress = false
 
   export let map = null
-  export let version = 'v1.11.1'
+  export let version = 'v2.3.1'
   export let center = [ 0, 0 ]
   export let zoom = 9
   export let zoomRate = 1
@@ -37,7 +44,7 @@
   export let customStylesheetUrl = false
   export let style = 'mapbox://styles/mapbox/streets-v11'
 
-  const opts = Object.assign({
+  const optionsWithDefaults = Object.assign({
     accessToken,
     container,
     style,
@@ -52,8 +59,8 @@
 
   const queue = new EventQueue()
 
-  function init (c) {
-    queue.start(c.map)
+  function init ({ detail }) {
+    queue.start(detail.map)
   }
 
   onDestroy(() => queue.stop())
@@ -78,10 +85,6 @@
     queue.send('addControl', [ control, position ])
   }
 
-  function setZoom (zoom, data = {}) {
-    queue.send('setZoom', [ zoom, data ])
-  }
-
   export function getMap () {
     return map
   }
@@ -89,6 +92,4 @@
   export function getMapbox () {
     return mapbox
   }
-
-  // $: !animationInProgress && setZoom(zoom)
 </script>
