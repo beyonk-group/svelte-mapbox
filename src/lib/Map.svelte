@@ -2,6 +2,7 @@
   use:action={optionsWithDefaults}
   on:ready={init}
   on:recentre
+  on:dragend
   on:click
   on:zoomstart
   on:zoom
@@ -65,7 +66,10 @@
     queue.start(map)
   }
 
-  onDestroy(() => queue.stop())
+  onDestroy(() => {
+    queue.stop()
+    map = undefined
+  })
 
   export function fitBounds (bbox, data = {}) {
     queue.send('fitBounds', [ bbox, data ])

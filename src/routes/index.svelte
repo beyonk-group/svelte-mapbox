@@ -200,7 +200,6 @@
 	}
 
 	function recentre ({ detail }) {
-		console.log(detail.center)
 		center = detail.center
 	}
 </script>
