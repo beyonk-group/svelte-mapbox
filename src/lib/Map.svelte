@@ -60,7 +60,9 @@
   const queue = new EventQueue()
 
   function init ({ detail }) {
-    queue.start(detail.map)
+    map = detail.map
+    mapbox = detail.mapbox
+    queue.start(map)
   }
 
   onDestroy(() => queue.stop())

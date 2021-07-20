@@ -31,7 +31,7 @@ function init (options, node) {
   window.mapboxgl.accessToken = options.accessToken
   const el = new window.mapboxgl.Map(options)
 
-  return bindEvents(el, handlers, node)
+  return bindEvents(el, handlers, window.mapboxgl, node)
 }
 
 const handlers = {
@@ -50,7 +50,7 @@ const handlers = {
   zoomend: el => {
     return [ 'zoomend', { zoom: el.getZoom() } ]
   },
-  load: el => {
-    return [ 'ready', { map: el } ]
+  load: (el, ev, mapbox) => {
+    return [ 'ready', { map: el, mapbox } ]
   }
 }
