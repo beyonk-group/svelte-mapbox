@@ -20,5 +20,8 @@
   "type": "module",
   "eslintConfig": {
     "extends": "@beyonk/eslint-config/svelte"
+  },
+  "volta": {
+    "node": "16.5.0"
   }
 }
