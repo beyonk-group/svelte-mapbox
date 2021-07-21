@@ -15,7 +15,8 @@
     "@sveltejs/kit": "next",
     "eslint": "^7.31.0",
     "eslint-plugin-svelte3": "^3.2.0",
-    "svelte": "^3.34.0"
+    "svelte": "^3.34.0",
+    "svelte2tsx": "^0.4.2"
   },
   "type": "module",
   "eslintConfig": {
