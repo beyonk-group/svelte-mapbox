@@ -1,6 +1,3 @@
-<svelte:head>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-</svelte:head>
 <header>
 	<div class="container">
 		<div class="row">
@@ -68,8 +65,8 @@
 					  </div>
 
 					<div class="section-txt" id="geocoder">
-						<form on:submit|preventDefault={() => console.log('form submitted') }>
-						<Geocoder accessToken="%API_KEY%" on:result={placeChanged} />
+						<form>
+						<Geocoder accessToken={mapboxToken} on:result={placeChanged} on:clear={() => mapComponent.setCenter({ lng: 0, lat: 0 })} />
             {#if place}
               <dl>
 								<dt>Name:</dt>
@@ -84,20 +81,21 @@
 						<div class="map-wrap">
 							<Map
 								bind:this={mapComponent}
-								accessToken="%API_KEY%"
-								on:recentre={e => console.log(e.detail) }
+								accessToken={mapboxToken}
+								on:recentre={recentre}
 								{center}
 								bind:zoom
 							>
 								<Earthquakes />
                 <NavigationControl />
-                <GeolocateControl />
+                <GeolocateControl on:geolocate={e => console.log('geolocated', e.detail)} />
 								<Marker lat={center.lat} lng={center.lng} />
 							</Map>
 						</div>
 						{#if center}
 							<dt>Geolocation:</dt>
 							<dd>lat: {center.lat}, lng: {center.lng}</dd>
+							<dd>zoom: {zoom}</dd>
 						{/if}
           </div>
 				</div>
@@ -159,21 +157,14 @@
         background: #ee8a65;
 	}
 
-
 </style>
 
 <script>
-  import './normalize.css'
-  import './prettify.css'
-  import './style.css'
-  import { Map, Geocoder, Marker, controls } from '../src/components.js'
-	import Earthquakes from './Earthquakes.svelte'
+	import { mapboxToken } from '$lib/conf.js'
+  import { Map, Geocoder, Marker, controls } from '$lib/components.js'
+	import Earthquakes from './_Earthquakes.svelte'
   
   const { GeolocateControl, NavigationControl } = controls
-	
-	if (typeof window !== 'undefined') {
-		window.global = {}
-	}
 
 	let page = 'about'
 	let place = null
@@ -206,5 +197,9 @@
       ],
       essential:true
     })
+	}
+
+	function recentre ({ detail }) {
+		center = detail.center
 	}
 </script>

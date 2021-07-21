@@ -8,6 +8,7 @@
 
 Maps and Geocoding (Autocomplete) [MapBox](https://www.mapbox.com/) components in Vanilla JS (or Svelte)
 
+* SvelteKit Ready
 * SSR Ready
 * Lightweight
 * No clientside dependencies (Map)
@@ -16,8 +17,6 @@ Maps and Geocoding (Autocomplete) [MapBox](https://www.mapbox.com/) components i
 * Note that the GeoCoder has a clientside dependency, since it adds about 0.5mb to the bundle size, and significant time to the build time if bundled.
 
 ## Installing
-
-**It is PARAMOUNT that you install this as a development dependency, not a runtime dependency. It won't work otherwise. Svelte bundles everything, so you should not need any runtime dependencies at all**
 
 ```
 npm install --save-dev @beyonk/svelte-mapbox
