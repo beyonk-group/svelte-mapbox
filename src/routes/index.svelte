@@ -88,7 +88,7 @@
 							>
 								<Earthquakes />
                 <NavigationControl />
-                <GeolocateControl />
+                <GeolocateControl on:geolocate={e => console.log('geolocated', e.detail)} />
 								<Marker lat={center.lat} lng={center.lng} />
 							</Map>
 						</div>

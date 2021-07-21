@@ -1,5 +1,5 @@
-import { load } from './asset-loader.js'
-import { bindEvents } from './event-bindings.js'
+import { load } from '../asset-loader.js'
+import { bindEvents } from '../event-bindings.js'
 
 export default function action (node, options = {}) {
   let map
@@ -38,7 +38,7 @@ const handlers = {
   dragend: el => {
     return [ 'dragend', { center: el.getCenter() } ]
   },
-  recentre: el => {
+  moveend: el => {
     return [ 'recentre', { center: el.getCenter() } ]
   },
   click: (el, { lngLat }) => {

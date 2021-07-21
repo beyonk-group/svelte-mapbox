@@ -1,12 +1,12 @@
 'use strict'
 
-import Map from './Map.svelte'
-import Marker from './Marker.svelte'
-import Geocoder from './Geocoder.svelte'
-import { contextKey } from './mapbox.js'
-import GeolocateControl from './controls/GeolocateControl.svelte'
-import NavigationControl from './controls/NavigationControl.svelte'
-import ScaleControl from './controls/ScaleControl.svelte'
+import Map from '$lib/map/Map.svelte'
+import Marker from '$lib/map/Marker.svelte'
+import Geocoder from '$lib/geocoder/Geocoder.svelte'
+import { contextKey } from '$lib/mapbox.js'
+import GeolocateControl from '$lib/map/controls/GeolocateControl.svelte'
+import NavigationControl from '$lib/map/controls/NavigationControl.svelte'
+import ScaleControl from '$lib/map/controls/ScaleControl.svelte'
 
 const controls = {
   GeolocateControl,

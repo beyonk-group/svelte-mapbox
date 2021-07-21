@@ -1,5 +1,5 @@
-import { load } from './asset-loader.js'
-import { bindEvents } from './event-bindings.js'
+import { load } from '../asset-loader.js'
+import { bindEvents } from '../event-bindings.js'
 
 export default function action (node, options = {}) {
   let map
