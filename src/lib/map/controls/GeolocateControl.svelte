@@ -9,8 +9,8 @@
 
 <script>
 	import { getContext, onMount } from 'svelte'
-	import { contextKey } from '$lib/mapbox.js'
-	import { bindEvents } from '$lib/event-bindings.js'
+	import { contextKey } from '../../mapbox.js'
+	import { bindEvents } from '../../event-bindings.js'
 
 	const { getMap, getMapbox } = getContext(contextKey)
 	const map = getMap()
@@ -43,7 +43,6 @@
 	map.addControl(geolocate, position)
 
 	onMount(() => {
-	  console.log('mounted')
 	  return bindEvents(geolocate, handlers, mapbox, dispatcher)
 	})
 

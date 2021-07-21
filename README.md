@@ -183,6 +183,8 @@ You can add additional css to override mapbox provided CSS by passing the `custo
 
 To see the earthquakes demo:
 
+Make sure you copy the `.env` file to `.env.local` and then populate it with your mapbox key.
+
 `
 npm run dev
 `
