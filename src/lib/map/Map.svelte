@@ -22,9 +22,9 @@
 
 <script>
   import { setContext, onDestroy } from 'svelte'
-  import { contextKey } from '$lib/mapbox.js'
+  import { contextKey } from '../mapbox.js'
   import action from './map-action.js'
-  import { EventQueue } from '$lib/queue.js'
+  import { EventQueue } from '../queue.js'
 
   setContext(contextKey, {
     getMap: () => map,
