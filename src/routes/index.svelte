@@ -161,45 +161,45 @@
 
 <script>
 	import { mapboxToken } from '$lib/conf.js'
-  import { Map, Geocoder, Marker, controls } from '$lib/components.js'
+import { Map, Geocoder, Marker, controls } from '$lib/components.js'
 	import Earthquakes from './_Earthquakes.svelte'
-  
-  const { GeolocateControl, NavigationControl } = controls
+
+const { GeolocateControl, NavigationControl } = controls
 
 	let page = 'about'
-	let place = null
+	const place = null
 	let center = { lat: 53.3358627, lng: -2.8572362 }
 	let zoom = 11.15
 	let mapComponent
 
 	function navigate (next) {
-		page = next
+	  page = next
 	}
 
 	function placeChanged (e) {
-    const { result } = e.detail
-		mapComponent.setCenter(result.center, 14)
+  const { result } = e.detail
+	  mapComponent.setCenter(result.center, 14)
 	}
 	
 	function randomLng () {
-		return 77 + (Math.random() - 0.5) * 30
+	  return 77 + (Math.random() - 0.5) * 30
 	}
 
 	function randomLat () {
-		return 13 + (Math.random() - 0.5) * 30
+	  return 13 + (Math.random() - 0.5) * 30
 	}
-  
+
 	function flyToRandomPlace () {
-		mapComponent.flyTo({
-      center: [
-				randomLng(),
-				randomLat()
-      ],
-      essential:true
-    })
+	  mapComponent.flyTo({
+    center: [
+	      randomLng(),
+	      randomLat()
+    ],
+    essential: true
+  })
 	}
 
 	function recentre ({ detail }) {
-		center = detail.center
+	  center = detail.center
 	}
 </script>

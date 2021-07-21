@@ -7,11 +7,18 @@
     "dev": "svelte-kit dev --port 3030",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
-    "preview": "svelte-kit preview"
+    "preview": "svelte-kit preview",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@beyonk/eslint-config": "^6.0.0",
     "@sveltejs/kit": "next",
+    "eslint": "^7.31.0",
+    "eslint-plugin-svelte3": "^3.2.0",
     "svelte": "^3.34.0"
   },
-  "type": "module"
+  "type": "module",
+  "eslintConfig": {
+    "extends": "@beyonk/eslint-config/svelte"
+  }
 }

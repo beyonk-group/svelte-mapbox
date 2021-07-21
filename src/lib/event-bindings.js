@@ -1,5 +1,5 @@
 function bindEvents (el, handlers, mapbox, node) {
-  let unbindings = []
+  const unbindings = []
 
   for (const [ handler, fn ] of Object.entries(handlers)) {
     const cmd = ev => {
