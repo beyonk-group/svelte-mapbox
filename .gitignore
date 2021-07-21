@@ -1,4 +1,5 @@
 .DS_Store
 node_modules
-dist/**.js
-dist/**.html
+/.svelte-kit
+/package
+.env.local
