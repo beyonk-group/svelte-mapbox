@@ -22,29 +22,29 @@
 	let dispatcher
 
 	const handlers = {
-		error: (el, ev) => {
-			return [ 'error', ev ]
-		},
-		geolocate: (el, ev) => {
-			return [ 'geolocate', ev ]
-		},
-		outofmaxbounds: (el, ev) => {
-			return [ 'outofmaxbounds', ev]
-		},
-		trackuserlocationend: (el, ev) => {
-			return [ 'trackuserlocationend', ev ]
-		},
-		trackuserlocationstart: (el, ev) => {
-			return [ 'trackuserlocationstart', ev ]
-		}
+	  error: (el, ev) => {
+	    return [ 'error', ev ]
+	  },
+	  geolocate: (el, ev) => {
+	    return [ 'geolocate', ev ]
+	  },
+	  outofmaxbounds: (el, ev) => {
+	    return [ 'outofmaxbounds', ev ]
+	  },
+	  trackuserlocationend: (el, ev) => {
+	    return [ 'trackuserlocationend', ev ]
+	  },
+	  trackuserlocationstart: (el, ev) => {
+	    return [ 'trackuserlocationstart', ev ]
+	  }
 	}
 
 	const geolocate = new mapbox.GeolocateControl(options)
 	map.addControl(geolocate, position)
 
 	onMount(() => {
-		console.log('mounted')
-		return bindEvents(geolocate, handlers, mapbox, dispatcher)
+	  console.log('mounted')
+	  return bindEvents(geolocate, handlers, mapbox, dispatcher)
 	})
 
 	export function trigger () {

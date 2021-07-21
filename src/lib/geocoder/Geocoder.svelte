@@ -22,13 +22,13 @@
   export let geocoder
 
   const optionsWithDefaults = Object.assign({
-      version,
-      accessToken,
-      types: types.join(','),
-      placeholder,
-      customStylesheetUrl,
-      value
-    }, options)
+    version,
+    accessToken,
+    types: types.join(','),
+    placeholder,
+    customStylesheetUrl,
+    value
+  }, options)
 
   function init ({ detail }) {
     geocoder = detail.geocoder
