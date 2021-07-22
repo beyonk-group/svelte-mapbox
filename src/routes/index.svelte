@@ -83,13 +83,14 @@
 								bind:this={mapComponent}
 								accessToken={mapboxToken}
 								on:recentre={recentre}
+								on:drag={drag}
 								{center}
 								bind:zoom
 							>
 								<Earthquakes />
                 <NavigationControl />
                 <GeolocateControl on:geolocate={e => console.log('geolocated', e.detail)} />
-								<Marker lat={center.lat} lng={center.lng} />
+								<Marker lat={marker.lat} lng={marker.lng} />
 							</Map>
 						</div>
 						{#if center}
@@ -161,7 +162,7 @@
 
 <script>
 	import { mapboxToken } from '$lib/conf.js'
-import { Map, Geocoder, Marker, controls } from '$lib/components.js'
+	import { Map, Geocoder, Marker, controls } from '$lib/components.js'
 	import Earthquakes from './_Earthquakes.svelte'
 
 const { GeolocateControl, NavigationControl } = controls
@@ -169,6 +170,7 @@ const { GeolocateControl, NavigationControl } = controls
 	let page = 'about'
 	const place = null
 	let center = { lat: 53.3358627, lng: -2.8572362 }
+	let marker = center
 	let zoom = 11.15
 	let mapComponent
 
@@ -201,5 +203,9 @@ const { GeolocateControl, NavigationControl } = controls
 
 	function recentre ({ detail }) {
 	  center = detail.center
+	}
+
+	function drag ({ detail }) {
+		marker = detail.center
 	}
 </script>
