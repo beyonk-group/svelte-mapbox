@@ -38,6 +38,9 @@ const handlers = {
   dragend: el => {
     return [ 'dragend', { center: el.getCenter() } ]
   },
+  drag: el => {
+    return [ 'drag', { center: el.getCenter() } ]
+  },
   moveend: el => {
     return [ 'recentre', { center: el.getCenter() } ]
   },

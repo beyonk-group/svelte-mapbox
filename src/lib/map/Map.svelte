@@ -7,6 +7,7 @@
   on:zoomstart
   on:zoom
   on:zoomend
+  on:drag
   >
   {#if map}
   <slot></slot>
