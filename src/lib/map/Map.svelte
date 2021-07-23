@@ -22,18 +22,10 @@
 </style>
 
 <script>
-  import { setContext, onDestroy } from 'svelte'
+  import { setContext, onDestroy, createEventDispatcher } from 'svelte'
   import { contextKey } from '../mapbox.js'
   import action from './map-action.js'
   import { EventQueue } from '../queue.js'
-
-  setContext(contextKey, {
-    getMap: () => map,
-    getMapbox: () => mapbox
-  })
-
-  let container
-  let mapbox
 
   export let map = null
   export let version = 'v2.3.1'
@@ -45,6 +37,16 @@
   export let accessToken
   export let customStylesheetUrl = false
   export let style = 'mapbox://styles/mapbox/streets-v11'
+
+  const dispatch = createEventDispatcher()
+
+  setContext(contextKey, {
+    getMap: () => map,
+    getMapbox: () => mapbox
+  })
+
+  let container
+  let mapbox
 
   const optionsWithDefaults = Object.assign({
     accessToken,
@@ -65,6 +67,7 @@
     map = detail.map
     mapbox = detail.mapbox
     queue.start(map)
+    dispatch('ready')
   }
 
   onDestroy(() => {

@@ -11,6 +11,7 @@
 />
 
 <script>
+  import { createEventDispatcher } from 'svelte'
   import action from './geocoder-action.js'
 
   export let accessToken
@@ -22,6 +23,7 @@
   export let customStylesheetUrl = false
   export let geocoder
 
+  const dispatch = createEventDispatcher()
   const fieldId = 'bsm-' + Math.random().toString(36).substring(6)
 
   const optionsWithDefaults = Object.assign({
@@ -35,6 +37,7 @@
 
   function init ({ detail }) {
     geocoder = detail.geocoder
+    dispatch('ready')
   }
 </script>
 
