@@ -66,7 +66,7 @@
 
           <div class="section-txt" id="geocoder">
             <form>
-            <Geocoder accessToken={mapboxToken} on:result={placeChanged} on:clear={() => mapComponent.setCenter({ lng: 0, lat: 0 })} />
+            <Geocoder value="(Near London)" accessToken={mapboxToken} on:result={placeChanged} on:clear={() => mapComponent.setCenter({ lng: 0, lat: 0 })} />
             {#if place}
               <dl>
                 <dt>Name:</dt>
@@ -146,16 +146,16 @@
   #fly-to,
   #change-zoom {
     display: block;
-        position: relative;
-        margin: 0px auto;
-        height: 40px;
-        padding: 10px;
-        border: none;
-        border-radius: 3px;
-        font-size: 12px;
-        text-align: center;
-        color: #fff;
-        background: #ee8a65;
+    position: relative;
+    margin: 0px auto;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #ee8a65;
   }
 
 </style>

@@ -29,7 +29,7 @@ export default function action (node, options = {}) {
 
 function init (options, node) {
   const geocoder = new window.MapboxGeocoder(options)
-  geocoder.addTo(node)
+  geocoder.addTo(`#${node.id}`)
   if (options.value) {
     geocoder.setInput(options.value)
   }
