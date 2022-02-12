@@ -30,6 +30,7 @@
   let elementPopup
 
   $: marker && move(lng, lat)
+  $: marker && marker.setOffset(markerOffset)
 
   onMount(() => {
     const namedParams = Object.assign(
