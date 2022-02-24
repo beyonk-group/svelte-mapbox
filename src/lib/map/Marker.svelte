@@ -56,6 +56,8 @@
       .setLngLat({ lng, lat })
       .addTo(map)
 
+    if (!element.hasChildNodes()) element.remove()
+
     return () => marker.remove()
   })
 
