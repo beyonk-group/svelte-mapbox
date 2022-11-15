@@ -1,26 +1,24 @@
 {
-  "name": "@beyonk/svelte-mapbox",
-  "version": "8.1.4",
-  "main": "src/lib/components.js",
-  "svelte": "src/lib/components.js",
-  "scripts": {
-    "dev": "svelte-kit dev --port 3030",
-    "build": "svelte-kit build",
-    "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
-    "lint": "eslint ."
-  },
-  "devDependencies": {
-    "@beyonk/eslint-config": "^6.0.0",
-    "@sveltejs/kit": "next",
-    "eslint": "^7.31.0",
-    "eslint-plugin-svelte3": "^3.2.0",
-    "svelte": "^3.34.0",
-    "svelte2tsx": "^0.4.2",
-    "typescript": "^4.3.5"
-  },
-  "type": "module",
-  "volta": {
-    "node": "16.5.0"
-  }
+	"name": "svelte-mapbox",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@beyonk/eslint-config": "^7.0.2",
+		"@beyonk/marker-clusterer-ssr": "^2.0.0",
+		"@fontsource/fira-mono": "^4.5.0",
+		"@neoconfetti/svelte": "^1.0.0",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"eslint": "^8.27.0",
+		"svelte": "^3.46.0",
+		"vite": "^3.1.0"
+	},
+	"type": "module",
+	"volta": {
+		"node": "19.1.0"
+	}
 }

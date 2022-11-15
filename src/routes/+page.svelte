@@ -87,7 +87,7 @@
                 {center}
                 bind:zoom
               >
-                <Earthquakes />
+                <Beyonk />
                 <NavigationControl />
                 <GeolocateControl on:geolocate={e => console.log('geolocated', e.detail)} />
                 <Marker lat={marker.lat} lng={marker.lng} />
@@ -163,7 +163,7 @@
 <script>
   import { mapboxToken } from '$lib/conf.js'
   import { Map, Geocoder, Marker, controls } from '$lib/components.js'
-  import Earthquakes from './_Earthquakes.svelte'
+  import Beyonk from './_Beyonk.svelte'
 
   const { GeolocateControl, NavigationControl } = controls
   const place = null

@@ -2,16 +2,64 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.png" />
+
 		<title>Svelte Mapbox Maps | Developer Documentation</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<link href="/normalize.css" rel="stylesheet" type="text/css" />
 		<link href="/prettify.css" rel="stylesheet" type="text/css" />
 		<link href="/style.css" rel="stylesheet" type="text/css" />
-		%svelte.head%
+		%sveltekit.head%
+
+		<style>
+			dl:after {content:"";display:table;clear:both;}
+dd {
+    padding:.5em 0;
+}
+dl {
+    width:100%;
+}
+dt, dd {
+    display:inline-block;
+    width:30%;
+}
+dt {
+    text-align:right;
+    font-weight:bold;
+    clear:left;
+    float:left;
+}
+dd {
+    width:70%;
+    padding-left:1em;
+    clear:right;
+}
+dd + dd {
+    float:right;
+    clear:both;
+}
+dt:first-child {
+    padding-top:.5em;
+}
+dd + dt {
+   clear:both;
+    padding-top:.5em;
+}
+dt + dt {
+    width: 100%;
+    float: none;
+    padding: 0 70% 0 0;
+}
+dt + dt + dd {
+    margin-top: -2em;
+}
+dt + dt + dd + dt {
+    margin-top: 2em;
+}
+		</style>
 	</head>
-	<body>
-		<div id="svelte">%svelte.body%</div>
+	<body data-sveltekit-prefetch>
+		<div>%sveltekit.body%</div>
 	</body>
 </html>
