@@ -1,6 +1,6 @@
 {
   "name": "@beyonk/svelte-mapbox",
-  "version": "9.0.3",
+  "version": "9.0.4",
   "scripts": {
     "dev": "vite dev --port 3030",
     "build": "vite build",
