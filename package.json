@@ -23,7 +23,7 @@
     "svelte": "^3.0.0"
   },
   "exports": {
-    ".": "./src/lib/components.js"
+    ".": "./components.js"
   },
   "type": "module",
   "volta": {
