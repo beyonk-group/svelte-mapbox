@@ -1,8 +1,6 @@
 {
   "name": "@beyonk/svelte-mapbox",
   "version": "9.0.3",
-  "main": "src/lib/components.js",
-  "svelte": "src/lib/components.js",
   "scripts": {
     "dev": "vite dev --port 3030",
     "build": "vite build",
@@ -23,6 +21,9 @@
   },
   "peerDependencies": {
     "svelte": "^3.0.0"
+  },
+  "exports": {
+    ".": "./src/lib/components.js"
   },
   "type": "module",
   "volta": {
