@@ -2,16 +2,17 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.png" />
 		<title>Svelte Mapbox Maps | Developer Documentation</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.bunny.net/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<link href="/normalize.css" rel="stylesheet" type="text/css" />
 		<link href="/prettify.css" rel="stylesheet" type="text/css" />
 		<link href="/style.css" rel="stylesheet" type="text/css" />
-		%svelte.head%
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		%sveltekit.head%
 	</head>
-	<body>
-		<div id="svelte">%svelte.body%</div>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
+

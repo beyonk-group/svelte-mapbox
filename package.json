@@ -4,20 +4,21 @@
   "main": "src/lib/components.js",
   "svelte": "src/lib/components.js",
   "scripts": {
-    "dev": "svelte-kit dev --port 3030",
-    "build": "svelte-kit build",
+    "dev": "vite dev --port 3030",
+    "build": "vite build",
     "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
+    "preview": "vite preview",
     "lint": "eslint ."
   },
   "devDependencies": {
     "@beyonk/eslint-config": "^6.0.0",
-    "@sveltejs/kit": "next",
+    "@sveltejs/kit": "^1.2.9",
     "eslint": "^7.31.0",
     "eslint-plugin-svelte3": "^3.2.0",
-    "svelte": "^3.34.0",
-    "svelte2tsx": "^0.4.2",
-    "typescript": "^4.3.5"
+    "svelte": "^3.55.1",
+    "svelte2tsx": "^0.6.0",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4"
   },
   "type": "module",
   "volta": {
