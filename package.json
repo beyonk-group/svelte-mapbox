@@ -1,6 +1,6 @@
 {
   "name": "@beyonk/svelte-mapbox",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "main": "src/lib/components.js",
   "svelte": "src/lib/components.js",
   "scripts": {
