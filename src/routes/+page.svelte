@@ -66,7 +66,7 @@
 
           <div class="section-txt" id="geocoder">
             <form>
-            <Geocoder value="(Near London)" accessToken={mapboxToken} on:result={placeChanged} on:clear={() => mapComponent.setCenter({ lng: 0, lat: 0 })} />
+            <Geocoder value="(Near London)" accessToken={PUBLIC_MAPBOX_TOKEN} on:result={placeChanged} on:clear={() => mapComponent.setCenter({ lng: 0, lat: 0 })} />
             {#if place}
               <dl>
                 <dt>Name:</dt>
@@ -81,7 +81,7 @@
             <div class="map-wrap">
               <Map
                 bind:this={mapComponent}
-                accessToken={mapboxToken}
+                accessToken={PUBLIC_MAPBOX_TOKEN}
                 on:recentre={recentre}
                 on:drag={drag}
                 {center}
@@ -161,7 +161,7 @@
 </style>
 
 <script>
-  import { mapboxToken } from '$lib/conf.js'
+  import { PUBLIC_MAPBOX_TOKEN } from '$env/static/public'
   import { Map, Geocoder, Marker, controls } from '$lib/components.js'
   import Earthquakes from './_Earthquakes.svelte'
 

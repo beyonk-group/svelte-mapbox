@@ -29,7 +29,7 @@
   import { EventQueue } from '../queue.js'
 
   export let map = null
-  export let version = 'v2.3.1'
+  export let version = 'v2.12.0'
   export let center = [ 0, 0 ]
   export let zoom = 9
   export let zoomRate = 1
