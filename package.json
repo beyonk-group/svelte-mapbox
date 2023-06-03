@@ -25,6 +25,7 @@
   "exports": {
     ".": "./components.js"
   },
+  "types": "./components.d.ts",
   "type": "module",
   "volta": {
     "node": "18.13.0"
