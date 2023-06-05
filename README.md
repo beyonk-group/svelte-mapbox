@@ -28,45 +28,30 @@ npm install --save-dev @beyonk/svelte-mapbox
 
 ### Basic Usage (Map)
 
-The container component is the map, and there are a variety of components which go on the map.
+Svelte-Mapbox is based on the official mapbox-gl package.
+You can find the [full documentation of methods and properties on docs.mapbox.com.](https://docs.mapbox.com/mapbox-gl-js/api/map/)
+
+**Basic Typescript Example:**
 
 ```jsx
-<Map
-  accessToken="<your api key>" // add your api key here
-  bind:this={mapComponent} // Get reference to your map component to use methods
-  on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) } // recentre events
-  options={{ scrollZoom: false }} // // add arbitrary options to the map from the mapbox api
->
-  <Earthquakes /> // Any custom component you create or want here - see marker example
-  <Marker lat={someLat} lng={someLng} color="rgb(255,255,255)" label="some marker label" popupClassName="class-name" /> // built in Marker component
-  <NavigationControl />
-  <GeolocateControl options={{ some: 'control-option' }} on:eventname={eventHandler} />
-  <ScaleControl />
-</Map>
+  <script lang="ts">
+    import { Map } from '@beyonk/svelte-mapbox'
+    let mapComponent: Map;
+    const PUBLIC_MAP_TOKEN = '<YOUR TOKEN>';
 
-<script>
-  import { Map, Geocoder, Marker, controls } from '@beyonk/svelte-mapbox'
-	import Earthquakes from './Earthquakes.svelte' // custom component
-  
-  const { GeolocateControl, NavigationControl, ScaleControl } = controls
-
-  // Usage of methods like setCenter and flyto
-  mapComponent.setCenter([lng,lat],zoom) // zoom is optional
-  mapComponent.flyTo({center:[lng,lat]}) // documentation (https://docs.mapbox.com/mapbox-gl-js/example/flyto)
-
-  // Define this to handle `eventname` events - see [GeoLocate Events](https://docs.mapbox.com/mapbox-gl-js/api/markers/#geolocatecontrol-events)
-  function eventHandler (e) {
-    const data = e.detail
-    // do something with `data`, it's the result returned from the mapbox event
-  }
-</script>
-
-<style>
-    :global(.mapboxgl-map) {
-        height: 200px;
-        // sometimes mapbox objects don't render as expected; troubleshoot by changing the height/width to px
+    function onMapReady() {
+      mapComponent.setZoom(12);
+      mapComponent.flyTo({center:[4.349984, 50.844985]});
     }
-</style>
+  </script>
+
+  <div style="height: 400px; width: 100%;">
+    <Map accessToken="{PUBLIC_MAPBOX_TOKEN}"
+         style="mapbox://styles/mapbox/outdoors-v11"
+         bind:this={mapComponent}
+         on:ready={onMapReady}>
+    </Map>
+  </div>
 ```
 
 ### Markers
