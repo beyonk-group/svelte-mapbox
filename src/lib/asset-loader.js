@@ -3,8 +3,10 @@ function load (assets, cb) {
     const existing = document.getElementById(id)
 
     if (existing) {
-      if (type === 'script') {
+      if (type === 'script' && existing.loaded ==  true) {
         cb()
+      } else {
+        existing.addEventListener('load', cb)
       }
       return
     }
@@ -15,7 +17,10 @@ function load (assets, cb) {
       tag.async = true
       tag.defer = true
       tag.src = value
-      tag.onload = () => cb()
+      tag.onload = () => {
+        tag.loaded = true
+        cb()
+      }
     } else {
       tag.rel = 'stylesheet'
       tag.href = value
