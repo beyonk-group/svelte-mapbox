@@ -23,7 +23,9 @@
     "svelte": "^4.x"
   },
   "exports": {
-    ".": "./components.js"
+    ".": {
+      "svelte": "./components.js"
+    }
   },
   "types": "./components.d.ts",
   "type": "module",
