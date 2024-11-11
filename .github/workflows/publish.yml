@@ -20,13 +20,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: authorise pnpm
+      - name: set up node and pnpm
         run: |
-          pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
           corepack enable
-
-      - name: install dependencies
-        run: pnpm install
+          pnpm i
 
       - name: test
         run: pnpm test
@@ -39,13 +36,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: authorise pnpm
+      - name: set up node and pnpm
         run: |
-          pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
           corepack enable
-        
-      - name: install dependencies
-        run: pnpm install
+          pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+          pnpm i
 
       - name: publish
         run: pnpm publish --access public
