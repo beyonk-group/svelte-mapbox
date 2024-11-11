@@ -6,42 +6,46 @@ on:
       - '*'
     tags:
       - 'v*'
+  pull_request:
+    branches:
+      - '*'
+
+env:
+  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: master
+      - name: checkout
+        uses: actions/checkout@v4
 
-      - uses: volta-cli/action@v1
+      - name: authorise pnpm
+        run: |
+          pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+          corepack enable
 
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: latest
-          run_install: true
+      - name: install dependencies
+        run: pnpm install
 
-      - run: pnpm lint
+      - name: test
+        run: pnpm test
 
   publish-npm:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: master
+      - name: checkout
+        uses: actions/checkout@v4
 
-      - uses: volta-cli/action@v1
+      - name: authorise pnpm
+        run: |
+          pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+          corepack enable
+        
+      - name: install dependencies
+        run: pnpm install
 
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: latest
-          run_install: true
-
-      - run: pnpm build
-      - run: |
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-          pnpm package
-          pnpm publish ./package
+      - name: publish
+        run: pnpm publish --access public

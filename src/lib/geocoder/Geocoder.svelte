@@ -16,7 +16,7 @@
 
   export let accessToken
   export let options = {}
-  export let version = 'v4.5.1'
+  export let version = 'v5.0.3'
   export let types = [ 'country', 'region', 'postcode', 'district', 'place', 'locality', 'neighborhood', 'address' ]
   export let placeholder = 'Search'
   export let value = null

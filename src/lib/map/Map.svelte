@@ -1,3 +1,4 @@
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
   use:action={optionsWithDefaults}
   on:ready={init}
@@ -9,6 +10,8 @@
   on:zoomend
   on:drag
   on:keydown
+  on:keyup
+  role="application"
   >
   {#if map}
   <slot></slot>
@@ -29,7 +32,7 @@
   import { EventQueue } from '../queue.js'
 
   export let map = null
-  export let version = 'v2.12.0'
+  export let version = 'v3.7.0'
   export let center = [ 0, 0 ]
   export let zoom = 9
   export let zoomRate = 1

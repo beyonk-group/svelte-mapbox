@@ -1,5 +1,5 @@
 <script>
-  import { getContext } from 'svelte'
+  import { getContext, mount } from 'svelte'
   import { contextKey } from '$lib/components.js'
   import MiniScroller from './_MiniScroller.svelte'
 
@@ -115,7 +115,10 @@
       .setHTML('<div id="mini-scroller"></div>')
       .addTo(map)
 
-    new MiniScroller({ target: document.getElementById('mini-scroller'), props: {} }) // eslint-disable-line no-new
+      mount(MiniScroller, {
+        target: document.getElementById('mini-scroller'),
+        props: {}
+      })
   })
   
   map.on('mouseenter', 'unclustered-point', function () {
