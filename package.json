@@ -24,7 +24,7 @@
     "svelte": ">=4.0.0"
   },
   "exports": {
-    ".": "./components.js"
+    ".": "./src/lib/components.js"
   },
   "types": "./components.d.ts",
   "type": "module",
