@@ -5,13 +5,14 @@ export default function action (node, options = {}) {
   let map
 
   const resources = [
-    { type: 'script', value: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${options.version}/mapbox-gl-geocoder.min.js`, id: 'byk-gc-js' },
-    { type: 'link', value: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${options.version}/mapbox-gl-geocoder.css`, id: 'byk-gc-css' }
+    { type: 'script', value: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${options.version}/mapbox-gl-geocoder.min.js`, id: 'byk-gc-js' }
   ]
 
   const customStylesheetUrl = options.customStylesheetUrl
   if (customStylesheetUrl) {
     resources.push({ type: 'link', value: customStylesheetUrl, id: 'byk-gcsu-css' })
+  } else {
+    resources.push({ type: 'link', value: `//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/${options.version}/mapbox-gl-geocoder.css`, id: 'byk-gc-css' })
   }
 
   let unbind = () => {}

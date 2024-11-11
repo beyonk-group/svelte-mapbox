@@ -8,7 +8,7 @@
   on:error
   on:clear
   on:load
-/>
+></div>
 
 <script>
   import { createEventDispatcher } from 'svelte'
