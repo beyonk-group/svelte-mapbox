@@ -28,4 +28,4 @@ jobs:
           pnpm i
 
       - name: publish
-        run: pnpm publish --access public
+        run: pnpm publish --no-git-checks --access public
